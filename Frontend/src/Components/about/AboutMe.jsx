@@ -5,29 +5,29 @@ export default function AboutMe() {
     const [showMore, setShowMore] = useState(false);
 
     return (
-        <div className='w-full px-4 sm:px-6 my-10'>
+        <div id='about' className='w-full px-4 sm:px-6 my-10'>
             <div className='max-w-3xl mx-auto'>
                 <h1 className='text-green-600 my-4 font-bold uppercase'>About Me</h1>
 
                 <div className='flex flex-col gap-4'>
                     {/* Always visible part */}
                     <div>
-                        I'm a passionate developer with a strong interest in various technology fields, including web development (with a primary focus on backend systems), cloud computing, data, game development, and AI. I'm also deeply intrigued by business entrepreneurship and the intersection of technology and innovation. With over 1 year of experience, I've honed my skills through personal projects and enjoy continuously learning and exploring new technologies to expand my expertise.
+                        I'm a passionate developer with a strong focus on web technologies, especially backend development using Django, PostgreSQL, and REST APIs. Over the past year, I’ve built and deployed several full-stack projects, blending creativity with technical precision. I enjoy working with modern tools like Tailwind CSS, Docker, Celery, and Nginx, and I'm always eager to explore and implement new technologies that push my skillset forward.
                     </div>
 
                     {/* Toggleable part */}
                     <div
-                        className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                        className={`overflow-hidden transition-all duration-1000 ease-in-out ${
                             showMore ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
                         }`}
                     >
                         <div className='flex flex-col gap-3 mt-2'>
                             <span>
-                                I hold a Bachelor's degree in Mechanical Engineering from the École Polytechnique de Lomé (EPL). Over the past year, I have transitioned into the field of computer science, driven by my passion for technology and problem-solving. I am currently pursuing a two-year Master's degree in Artificial Intelligence and Big Data at the Collège de Paris Supérieur, where I am further deepening my expertise in cutting-edge technologies.
+                            My interests span across competitive programming (C/C++), system design, cloud computing, AI/ML —fields where logic, performance, and innovation intersect. I actively challenge myself through hands-on projects and by participating in competitive programming contests to sharpen my problem-solving abilities.
                             </span>
 
                             <span>
-                                When I'm not coding, I spend my time listening to music, reading books, working out at the gym, and playing games or enjoying manga/anime.
+                            Beyond development, I’m driven by entrepreneurial ambition and aspire to build a meaningful startup that blends technology and impact. I’m continuously learning, pushing boundaries, and working toward my dream of contributing to world-class tech teams.
                             </span>
                         </div>
                     </div>

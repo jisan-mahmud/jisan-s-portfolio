@@ -1,8 +1,7 @@
 import React from 'react'
 import LinkButton from '../button/LinkButton'
-import IconButton from '../button/IconButton'
-import { FaGithub, FaLinkedin } from "react-icons/fa";
-import { FaSquareXTwitter } from "react-icons/fa6";
+import SocialIcons from './SocialIcons';
+import { TypeAnimation } from 'react-type-animation';
 
 export default function Intro() {
     return (
@@ -11,13 +10,18 @@ export default function Intro() {
 
                 {/* Text Section */}
                 <div className='flex-1 md:text-left'>
-                    <h1
+                    <TypeAnimation
+                        sequence={[
+                            "Hi, I'm Jisan Mahmud",
+                            1000,
+                        ]}
+                        wrapper="h1"
+                        cursor={true}
+                        className="text-md md:text-2xl font-bold tracking-tight"
                         style={{ fontFamily: '"Quando", serif' }}
-                        className='text-md md:text-2xl font-bold tracking-tight'
-                    >
-                        Hi, I'm Jisan Mahmud
-                    </h1>
-                    <p className='my-1 sm:my-3 text-sm sm:text-lg text-gray-300'>
+                    />
+
+                    <p className='my-1 leading-tight sm:my-3 text-sm sm:text-lg text-gray-300'>
                         A self-taught fullstack developer, specializing in building scalable and efficient backend systems.
                     </p>
                     <span className='block my-2 text-sm sm:text-base'>
@@ -25,13 +29,11 @@ export default function Intro() {
                     </span>
                     <div className='flex gap-2 sm:gap-4 my-2 sm:my-4 items-center'>
                         <div>
-                            <LinkButton />
+                            <LinkButton label={'Resume'} />
                         </div>
 
-                        <div className='flex gap-1.5 sm:gap-3 items-center'>
-                            <IconButton icon={<FaGithub />} />
-                            <IconButton icon={<FaLinkedin />} />
-                            <IconButton icon={<FaSquareXTwitter />} />
+                        <div>
+                            <SocialIcons />
                         </div>
                     </div>
 

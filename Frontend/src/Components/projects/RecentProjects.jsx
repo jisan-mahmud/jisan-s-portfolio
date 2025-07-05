@@ -3,32 +3,42 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import '../../style/swiper-custom.css'; 
+import '../../style/swiper-custom.css';
+import { FaGithub } from "react-icons/fa";
+import IconButton from '../button/IconButton';
+import { TbWorld } from "react-icons/tb";
 
 const projects = [
   {
-    title: 'Password Generator',
+    title: 'Picgenre - Automate Your Stock Success',
     description:
-      "This website will generate a random password. Depending on the chosen criteria we'll have a...",
-    image: '/images/jisan.jpg',
+      'Transform your microstock workflow with AI-powered tools that make metadata management fast, efficient, and more profitable.',
+    image: '/images/picgenre_project.jpg',
+    live_link: 'picgenre.com'
   },
   {
-    title: 'Personal Blog API',
+    title: 'DeepErase: AI-Powered Background Removal Tool',
     description:
-      'A RESTful API that would power a personal blog. The client interface can be found...',
-    image: '/images/blog-api.png',
+      'DeepErase is an intuitive GUI desktop application designed to help users effortlessly remove backgrounds from images using advanced AI technology.',
+    image: '/images/deeperase_project.jpg',
+    github_link: 'https://github.com/jisan-mahmud/Background-remover-gui-app',
   },
   {
-    title: 'Weather App',
-    description: 'A simple weather app using an open weather API.',
-    image: '/images/weather-app.png',
+    title: 'IngredientAI: Instant Recipes from Food Images',
+    description:
+      'IngredientAI converts food images into detailed recipes and provides step-by-step instructions for making them. ',
+    image: '/images/ingredientai_project.jpg',
+    github_link: 'https://github.com/jisan-mahmud/ingredientai',
+    live_link: 'https://ingredientai.pythonanywhere.com/'
   },
   {
-    title: 'Portfolio Website',
+    title: 'Ecare - Appointment Booking Project',
     description:
-      'A personal portfolio website showcasing projects and skills.',
-    image: '/images/portfolio.png',
+      "The Appointment Booking System for the eCare Hospital Management System is designed to streamline the process of scheduling appointments between patients and doctors.",
+    image: '/images/ecare_project.jpg',
+    github_link: 'https://github.com/jisan-mahmud/ecare_backend'
   },
+
 ];
 
 export default function RecentProjects() {
@@ -61,22 +71,37 @@ export default function RecentProjects() {
                 key={index}
                 className="!w-[90%] md:!w-[46%] lg:!w-[44%]"
               >
-                <div className="rounded-xl border border-gray-700 hover:scale-105 duration-500 overflow-hidden min-h-[300px] shadow-md">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-48 object-cover"
-                  />
+                <div className="group relative rounded-xl border border-gray-700 hover:scale-105 duration-500 overflow-hidden min-h-[300px] shadow-md">
+
+                  {/* Image with blur on hover */}
+                  <div className="relative w-full h-48 overflow-hidden">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-full object-cover transition duration-300 group-hover:blur-sm"
+                    />
+
+                    {/* Buttons over the image */}
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                      <div className="flex gap-4">
+                        {project.github_link && (
+                          <IconButton link={project.github_link} className={'hover:!bg-transparent hover:!text-black'} icon={<FaGithub />} />
+                        )}
+                        {project.live_link && (
+                            <IconButton link={project.live_link} className={'hover:!bg-transparent hover:!text-black'} icon={<TbWorld />} />
+                        )}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Text content */}
                   <div className="p-4">
-                    <h3 className="text-white font-semibold text-lg">
-                      {project.title}
-                    </h3>
-                    <p className="text-gray-300 text-sm mt-2">
-                      {project.description}
-                    </p>
+                    <h3 className="text-white font-semibold text-lg">{project.title}</h3>
+                    <p className="text-gray-300 text-sm mt-2">{project.description}</p>
                   </div>
                 </div>
               </SwiperSlide>
+
             ))}
           </Swiper>
 
