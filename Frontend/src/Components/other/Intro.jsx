@@ -20,7 +20,7 @@ export default function Intro() {
                     <p className='my-1 sm:my-3 text-sm sm:text-lg text-gray-300'>
                         A self-taught fullstack developer, specializing in building scalable and efficient backend systems.
                     </p>
-                    <span className='block my-2 text-sm sm:text-base text-gray-400'>
+                    <span className='block my-2 text-sm sm:text-base'>
                         Mymensingh, Bangladesh
                     </span>
                     <div className='flex gap-2 sm:gap-4 my-2 sm:my-4 items-center'>
