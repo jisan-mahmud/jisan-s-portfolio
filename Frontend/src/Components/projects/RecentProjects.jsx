@@ -61,7 +61,7 @@ export default function RecentProjects() {
                 key={index}
                 className="!w-[90%] md:!w-[46%] lg:!w-[44%]"
               >
-                <div className="rounded-xl border border-gray-700 overflow-hidden min-h-[300px] shadow-md">
+                <div className="rounded-xl border border-gray-700 hover:scale-105 duration-500 overflow-hidden min-h-[300px] shadow-md">
                   <img
                     src={project.image}
                     alt={project.title}
