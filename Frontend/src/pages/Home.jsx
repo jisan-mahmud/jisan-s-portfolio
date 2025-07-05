@@ -1,9 +1,10 @@
+import Intro from '../Components/other/Intro';
 import React from 'react';
 
 export default function Home() {
   return (
     <div>
-      <h1 className='text-4xl'>Hello world</h1>
+      <Intro/>
     </div>
   );
 }
