@@ -1,6 +1,6 @@
 import React from 'react';
-import { FaPython, FaJs, FaReact, FaNodeJs, FaHtml5, FaCss3Alt, FaGitAlt, FaDocker } from 'react-icons/fa';
-import { SiDjango, SiTailwindcss, SiPostgresql, SiMongodb, SiRedux, SiTypescript } from 'react-icons/si';
+import { FaPython, FaJs, FaReact, FaHtml5, FaCss3Alt, FaGitAlt, FaDocker } from 'react-icons/fa';
+import { SiDjango, SiTailwindcss, SiPostgresql, SiNginx, SiJsonwebtokens} from 'react-icons/si';
 
 export default function Technologies() {
     const technologies = [
@@ -13,6 +13,8 @@ export default function Technologies() {
         { name: 'Tailwind CSS', icon: <SiTailwindcss /> },
         { name: 'PostgreSQL', icon: <SiPostgresql /> },
         { name: 'Git', icon: <FaGitAlt /> },
+        { name: 'JWT', icon: <SiJsonwebtokens /> },
+        { name: 'Nginx', icon: <SiNginx /> },
         { name: 'Docker', icon: <FaDocker /> },
     ];
 

@@ -13,7 +13,7 @@ export default function Contact() {
                     <p className="text-lg text-white font-light">
                         Any questions, proposals, or collaborations? Feel free to reach out.
                     </p>
-                    <LinkButton label={'Say Hello!'} />
+                    <LinkButton link={'mailto:jisan.mahmud203@gmail.com'} label={'Say Hello!'} />
                 </div>
 
 
