@@ -6,12 +6,12 @@ export default function Header() {
   return (
     <header className="w-full px-4 sm:px-6">
       <div className="max-w-3xl mx-auto py-4 flex items-center justify-between gap-4 sm:gap-0">
-        <h1
+        <Link
           className="text-lg sm:text-3xl text-green-600 font-bold"
           style={{ fontFamily: '"Caveat", cursive' }}
         >
           Jisan Mahmud
-        </h1>
+        </Link>
 
         <nav>
           <ul className="flex flex-wrap justify-center gap-4 text-sm sm:text-base">
