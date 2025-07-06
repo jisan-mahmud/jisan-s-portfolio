@@ -3,7 +3,7 @@ import LinkButton from '../button/LinkButton'
 
 export default function Contact() {
     return (
-        <div className="py-5 px-4 sm:px-6 w-full">
+        <div id='contact' className="py-5 px-4 sm:px-6 w-full">
             <div className="max-w-3xl mx-auto">
                 <h2 className="text-green-500 uppercase font-bold text-sm mb-6">
                     Let's Connect

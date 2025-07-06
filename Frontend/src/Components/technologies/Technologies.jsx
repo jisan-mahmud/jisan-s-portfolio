@@ -19,7 +19,7 @@ export default function Technologies() {
     ];
 
     return (
-        <div className="py-10 px-4 sm:px-6 w-full">
+        <div id='technologies' className="py-10 px-4 sm:px-6 w-full">
             <div className="max-w-3xl mx-auto">
                 <h2 className="text-green-500 uppercase font-bold text-sm mb-6">
                     Technologies

@@ -29,7 +29,7 @@ export default function Intro() {
                     </span>
                     <div className='flex gap-2 sm:gap-4 my-2 sm:my-4 items-center'>
                         <div>
-                            <LinkButton label={'Resume'} />
+                            <LinkButton link={'https://drive.google.com/file/d/19d1qAVrUHswMDTLxkMcJxyE6xHycCoOv/view?usp=sharing'} label={'Resume'} />
                         </div>
 
                         <div>

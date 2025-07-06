@@ -43,7 +43,7 @@ const projects = [
 
 export default function RecentProjects() {
   return (
-    <div className="bg-[#0F172A] py-10 px-4 sm:px-6 w-full">
+    <div id='projects' className="py-10 px-4 sm:px-6 w-full">
       <div className="max-w-3xl mx-auto">
         <h2 className="text-green-500 uppercase font-bold text-sm mb-6">
           Recent Projects
