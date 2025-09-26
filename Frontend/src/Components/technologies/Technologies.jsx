@@ -15,7 +15,6 @@ export default function Technologies() {
         { name: 'Git', icon: <FaGitAlt /> },
         { name: 'JWT', icon: <SiJsonwebtokens /> },
         { name: 'Nginx', icon: <SiNginx /> },
-        { name: 'Docker', icon: <FaDocker /> },
     ];
 
     return (

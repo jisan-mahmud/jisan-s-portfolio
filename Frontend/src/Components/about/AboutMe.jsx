@@ -12,7 +12,7 @@ export default function AboutMe() {
                 <div className='flex flex-col gap-4'>
                     {/* Always visible part */}
                     <div>
-                        I'm a passionate developer with a strong focus on web technologies, especially backend development using Django, PostgreSQL, and REST APIs. Over the past year, I’ve built and deployed several full-stack projects, blending creativity with technical precision. I enjoy working with modern tools like Tailwind CSS, Docker, Celery, and Nginx, and I'm always eager to explore and implement new technologies that push my skillset forward.
+                    I'm a developer who’s passionate about building for the web, with a strong focus on backend development using Django, PostgreSQL, and REST APIs. Over the past year, I’ve worked on and deployed several full-stack projects where I’ve been able to combine creativity with technical problem-solving. I also enjoy working with tools like Tailwind CSS, React, Celery, and Nginx, and I’m always curious to learn and experiment with new technologies that help me grow as a developer.
                     </div>
 
                     {/* Toggleable part */}
