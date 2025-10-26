@@ -14,7 +14,7 @@ const projects = [
     description:
       'Transform your microstock workflow with AI-powered tools that make metadata management fast, efficient, and more profitable.',
     image: '/images/picgenre_project.jpg',
-    github_link: 'https://github.com/jisan-mahmud/picgenre',
+    live_link: 'https://picgenre.com',
   },
   {
     title: 'DeepErase: AI-Powered Background Removal Tool',
