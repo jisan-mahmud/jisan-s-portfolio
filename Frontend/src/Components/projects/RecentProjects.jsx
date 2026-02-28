@@ -7,6 +7,7 @@ import '../../style/swiper-custom.css';
 import { FaGithub } from "react-icons/fa";
 import IconButton from '../button/IconButton';
 import { TbWorld } from "react-icons/tb";
+import { motion } from 'framer-motion';
 
 const projects = [
   {
@@ -43,11 +44,24 @@ const projects = [
 
 export default function RecentProjects() {
   return (
-    <div id='projects' className="py-10 px-4 sm:px-6 w-full">
+    <motion.div 
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.8 }}
+      id='projects' 
+      className="py-10 px-4 sm:px-6 w-full"
+    >
       <div className="max-w-3xl mx-auto">
-        <h2 className="text-green-500 uppercase font-bold text-sm mb-6">
+        <motion.h2 
+          initial={{ x: -50, opacity: 0 }}
+          whileInView={{ x: 0, opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-green-500 uppercase font-bold text-sm mb-6"
+        >
           Recent Projects
-        </h2>
+        </motion.h2>
 
         {/* Carousel container with arrows outside */}
         <div className="relative flex items-center">
@@ -71,7 +85,14 @@ export default function RecentProjects() {
                 key={index}
                 className="!w-[90%] md:!w-[46%] lg:!w-[44%]"
               >
-                <div className="group relative rounded-xl border border-gray-700 hover:scale-105 duration-500 overflow-hidden min-h-[300px] shadow-md">
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1, duration: 0.5 }}
+                  whileHover={{ scale: 1.05, y: -10 }}
+                  className="group relative rounded-xl border border-gray-700 duration-500 overflow-hidden min-h-[300px] shadow-md"
+                >
 
                   {/* Image with blur on hover */}
                   <div className="relative w-full h-48 overflow-hidden">
@@ -99,7 +120,7 @@ export default function RecentProjects() {
                     <h3 className="text-white font-semibold text-lg">{project.title}</h3>
                     <p className="text-gray-300 text-sm mt-2">{project.description}</p>
                   </div>
-                </div>
+                </motion.div>
               </SwiperSlide>
 
             ))}
@@ -109,6 +130,6 @@ export default function RecentProjects() {
           <div className="swiper-button-next -mr-6 z-10 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center cursor-pointer" />
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

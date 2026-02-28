@@ -2,6 +2,7 @@ import React from 'react'
 import LinkButton from '../button/LinkButton'
 import SocialIcons from './SocialIcons';
 import { TypeAnimation } from 'react-type-animation';
+import { motion } from 'framer-motion';
 
 export default function Intro() {
     return (
@@ -9,7 +10,12 @@ export default function Intro() {
             <div className='max-w-3xl mx-auto flex justify-between gap-8 md:gap-14'>
 
                 {/* Text Section */}
-                <div className='flex-1 md:text-left'>
+                <motion.div 
+                    initial={{ x: -100, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{ duration: 0.8, ease: 'easeOut' }}
+                    className='flex-1 md:text-left'
+                >
                     <TypeAnimation
                         sequence={[
                             "Hi, I'm Jisan Mahmud",
@@ -21,13 +27,28 @@ export default function Intro() {
                         style={{ fontFamily: '"Quando", serif' }}
                     />
 
-                    <p className='my-1 leading-tight sm:my-3 text-sm sm:text-lg text-gray-300'>
+                    <motion.p 
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.5, duration: 0.6 }}
+                        className='my-1 leading-tight sm:my-3 text-sm sm:text-lg text-gray-300'
+                    >
                         A self-taught fullstack developer, specializing in building scalable and efficient backend systems.
-                    </p>
-                    <span className='block my-2 text-sm sm:text-base'>
+                    </motion.p>
+                    <motion.span 
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.7, duration: 0.6 }}
+                        className='block my-2 text-sm sm:text-base'
+                    >
                         Mymensingh, Bangladesh
-                    </span>
-                    <div className='flex gap-2 sm:gap-4 my-2 sm:my-4 items-center'>
+                    </motion.span>
+                    <motion.div 
+                        initial={{ y: 20, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{ delay: 0.9, duration: 0.6 }}
+                        className='flex gap-2 sm:gap-4 my-2 sm:my-4 items-center'
+                    >
                         <div>
                             <LinkButton link={'https://drive.google.com/file/d/19d1qAVrUHswMDTLxkMcJxyE6xHycCoOv/view?usp=sharing'} label={'Resume'} />
                         </div>
@@ -35,18 +56,24 @@ export default function Intro() {
                         <div>
                             <SocialIcons />
                         </div>
-                    </div>
+                    </motion.div>
 
-                </div>
+                </motion.div>
 
                 {/* Image Section */}
-                <div className='flex-1 flex my-auto justify-end'>
+                <motion.div 
+                    initial={{ scale: 0, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ delay: 0.4, duration: 0.8, ease: 'easeOut' }}
+                    whileHover={{ scale: 1.05, rotate: 5 }}
+                    className='flex-1 flex my-auto justify-end'
+                >
                     <img
                         src='images/jisan.jpg'
                         alt='Jisan Mahmud'
                         className='flex w-28 sm:w-32 md:w-40 h-28 sm:h-32 md:h-40 rounded-full shadow-lg object-cover'
                     />
-                </div>
+                </motion.div>
             </div>
         </div>
     )

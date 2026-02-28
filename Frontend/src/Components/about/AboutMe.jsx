@@ -1,25 +1,49 @@
 import React, { useState } from 'react'
 import { IoIosArrowDown } from "react-icons/io";
+import { motion } from 'framer-motion';
 
 export default function AboutMe() {
     const [showMore, setShowMore] = useState(false);
 
     return (
-        <div id='about' className='w-full px-4 sm:px-6 my-10'>
+        <motion.div 
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.8 }}
+            id='about' 
+            className='w-full px-4 sm:px-6 my-10'
+        >
             <div className='max-w-3xl mx-auto'>
-                <h1 className='text-green-600 my-4 font-bold uppercase'>About Me</h1>
+                <motion.h1 
+                    initial={{ x: -50, opacity: 0 }}
+                    whileInView={{ x: 0, opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                    className='text-green-600 my-4 font-bold uppercase'
+                >
+                    About Me
+                </motion.h1>
 
                 <div className='flex flex-col gap-4'>
                     {/* Always visible part */}
-                    <div>
-                    I'm a developer who’s passionate about building for the web, with a strong focus on backend development using Django, PostgreSQL, and REST APIs. Over the past year, I’ve worked on and deployed several full-stack projects where I’ve been able to combine creativity with technical problem-solving. I also enjoy working with tools like Tailwind CSS, React, Celery, and Nginx, and I’m always curious to learn and experiment with new technologies that help me grow as a developer.
-                    </div>
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.2, duration: 0.6 }}
+                    >
+                    I'm a developer who's passionate about building for the web, with a strong focus on backend development using Django, PostgreSQL, and REST APIs. Over the past year, I've worked on and deployed several full-stack projects where I've been able to combine creativity with technical problem-solving. I also enjoy working with tools like Tailwind CSS, React, Celery, and Nginx, and I'm always curious to learn and experiment with new technologies that help me grow as a developer.
+                    </motion.div>
 
                     {/* Toggleable part */}
-                    <div
-                        className={`overflow-hidden transition-all duration-1000 ease-in-out ${
-                            showMore ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
-                        }`}
+                    <motion.div
+                        animate={{ 
+                            height: showMore ? 'auto' : 0,
+                            opacity: showMore ? 1 : 0
+                        }}
+                        transition={{ duration: 0.5, ease: 'easeInOut' }}
+                        className='overflow-hidden'
                     >
                         <div className='flex flex-col gap-3 mt-2'>
                             <span>
@@ -27,25 +51,28 @@ export default function AboutMe() {
                             </span>
 
                             <span>
-                            Beyond development, I’m driven by entrepreneurial ambition and aspire to build a meaningful startup that blends technology and impact. I’m continuously learning, pushing boundaries, and working toward my dream of contributing to world-class tech teams.
+                            Beyond development, I'm driven by entrepreneurial ambition and aspire to build a meaningful startup that blends technology and impact. I'm continuously learning, pushing boundaries, and working toward my dream of contributing to world-class tech teams.
                             </span>
                         </div>
-                    </div>
+                    </motion.div>
                 </div>
 
                 {/* Toggle Button */}
-                <div
+                <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                     className='flex items-center gap-1 mt-4 cursor-pointer select-none text-gray-400 hover:underline w-fit'
                     onClick={() => setShowMore(prev => !prev)}
                 >
-                    <IoIosArrowDown
-                        className={`transition-transform duration-300 ${
-                            showMore ? 'rotate-180' : 'rotate-0'
-                        }`}
-                    />
+                    <motion.div
+                        animate={{ rotate: showMore ? 180 : 0 }}
+                        transition={{ duration: 0.3 }}
+                    >
+                        <IoIosArrowDown />
+                    </motion.div>
                     <span>{showMore ? 'View Less' : 'View More'}</span>
-                </div>
+                </motion.div>
             </div>
-        </div>
+        </motion.div>
     )
 }

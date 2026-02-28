@@ -1,6 +1,7 @@
 import React from 'react';
 import { FaPython, FaJs, FaReact, FaHtml5, FaCss3Alt, FaGitAlt, FaDocker } from 'react-icons/fa';
 import { SiDjango, SiTailwindcss, SiPostgresql, SiNginx, SiJsonwebtokens} from 'react-icons/si';
+import { motion } from 'framer-motion';
 
 export default function Technologies() {
     const technologies = [
@@ -18,27 +19,45 @@ export default function Technologies() {
     ];
 
     return (
-        <div id='technologies' className="py-10 px-4 sm:px-6 w-full">
+        <motion.div 
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.8 }}
+            id='technologies' 
+            className="py-10 px-4 sm:px-6 w-full"
+        >
             <div className="max-w-3xl mx-auto">
-                <h2 className="text-green-500 uppercase font-bold text-sm mb-6">
+                <motion.h2 
+                    initial={{ x: -50, opacity: 0 }}
+                    whileInView={{ x: 0, opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                    className="text-green-500 uppercase font-bold text-sm mb-6"
+                >
                     Technologies
-                </h2>
+                </motion.h2>
 
                 <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-7 gap-4">
-                    {technologies.map((technology) => (
-                        <div
+                    {technologies.map((technology, index) => (
+                        <motion.div
                             key={technology.name}
+                            initial={{ opacity: 0, scale: 0.5 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: index * 0.05, duration: 0.4 }}
+                            whileHover={{ scale: 1.1, y: -5 }}
                             className="group aspect-square w-full border border-gray-700 rounded-xl p-1 flex flex-col items-center justify-center text-white hover:shadow-lg transition duration-300 ease-in-out"
                         >
                             <div className="text-4xl mb-2 transform transition-transform duration-500 group-hover:-translate-y-1">
                                 {technology.icon}
                             </div>
                             <span className="font-medium text-sm text-center">{technology.name}</span>
-                        </div>
+                        </motion.div>
                     ))}
                 </div>
 
             </div>
-        </div>
+        </motion.div>
     );
 }
