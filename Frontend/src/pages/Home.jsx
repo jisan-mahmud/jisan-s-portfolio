@@ -5,12 +5,14 @@ import React from 'react';
 import Technologies from '../Components/technologies/Technologies';
 import Contact from '../Components/contact/Contact';
 import Footer from '../Components/footer/Footer';
+import Experience from '../Components/experience/Experience';
 
 export default function Home() {
   return (
     <div>
       <Intro/>
       <AboutMe/>
+      <Experience/>
       <RecentProjects/>
       <Technologies/>
       <Contact/>

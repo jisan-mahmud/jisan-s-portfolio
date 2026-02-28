@@ -50,7 +50,7 @@ export default function RecentProjects() {
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.8 }}
       id='projects' 
-      className="py-10 px-4 sm:px-6 w-full"
+      className="py-10 px-4 sm:px-6 w-full scroll-mt-32"
     >
       <div className="max-w-3xl mx-auto">
         <motion.h2 
@@ -58,7 +58,8 @@ export default function RecentProjects() {
           whileInView={{ x: 0, opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-green-500 uppercase font-bold text-sm mb-6"
+          className="text-green-500 uppercase font-bold text-sm mb-6 tracking-wider"
+          style={{ fontFamily: '"Poppins", sans-serif' }}
         >
           Recent Projects
         </motion.h2>
@@ -117,8 +118,8 @@ export default function RecentProjects() {
 
                   {/* Text content */}
                   <div className="p-4">
-                    <h3 className="text-white font-semibold text-lg">{project.title}</h3>
-                    <p className="text-gray-300 text-sm mt-2">{project.description}</p>
+                    <h3 className="text-white font-semibold text-lg" style={{ fontFamily: '"Poppins", sans-serif' }}>{project.title}</h3>
+                    <p className="text-gray-300 text-sm mt-2 leading-relaxed">{project.description}</p>
                   </div>
                 </motion.div>
               </SwiperSlide>

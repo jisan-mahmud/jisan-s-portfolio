@@ -7,10 +7,8 @@ export default function MainLayout() {
   return (
     <div className="relative min-h-screen">
       <CodeAnimation />
-      <div>
-        <Header />
-      </div>
-      <div>
+      <Header />
+      <div className="pt-24">
         <Outlet />
       </div>
     </div>

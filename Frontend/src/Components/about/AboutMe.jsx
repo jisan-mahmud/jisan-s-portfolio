@@ -12,7 +12,7 @@ export default function AboutMe() {
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.8 }}
             id='about' 
-            className='w-full px-4 sm:px-6 my-10'
+            className='w-full px-4 sm:px-6 my-10 scroll-mt-32'
         >
             <div className='max-w-3xl mx-auto'>
                 <motion.h1 
@@ -20,7 +20,8 @@ export default function AboutMe() {
                     whileInView={{ x: 0, opacity: 1 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
-                    className='text-green-600 my-4 font-bold uppercase'
+                    className='text-green-600 my-4 font-bold uppercase tracking-wider'
+                    style={{ fontFamily: '"Poppins", sans-serif' }}
                 >
                     About Me
                 </motion.h1>

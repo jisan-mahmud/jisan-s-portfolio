@@ -1,10 +1,14 @@
 import React from 'react';
-import { FaPython, FaJs, FaReact, FaHtml5, FaCss3Alt, FaGitAlt, FaDocker } from 'react-icons/fa';
+import { FaPython, FaJs, FaReact, FaHtml5, FaCss3Alt, FaGitAlt, FaDocker, FaLinux } from 'react-icons/fa';
+import { TbBrandCpp } from "react-icons/tb";
+import { FaC } from "react-icons/fa6";
 import { SiDjango, SiTailwindcss, SiPostgresql, SiNginx, SiJsonwebtokens} from 'react-icons/si';
 import { motion } from 'framer-motion';
 
 export default function Technologies() {
     const technologies = [
+        { name: 'C', icon: <FaC /> },
+        { name: 'C++', icon: <TbBrandCpp /> },
         { name: 'Python', icon: <FaPython /> },
         { name: 'JavaScript', icon: <FaJs /> },
         { name: 'React', icon: <FaReact /> },
@@ -15,7 +19,9 @@ export default function Technologies() {
         { name: 'PostgreSQL', icon: <SiPostgresql /> },
         { name: 'Git', icon: <FaGitAlt /> },
         { name: 'JWT', icon: <SiJsonwebtokens /> },
+        { name: 'Linux', icon: <FaLinux /> },
         { name: 'Nginx', icon: <SiNginx /> },
+        { name: 'Docker', icon: <FaDocker /> },
     ];
 
     return (
@@ -25,7 +31,7 @@ export default function Technologies() {
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.8 }}
             id='technologies' 
-            className="py-10 px-4 sm:px-6 w-full"
+            className="py-10 px-4 sm:px-6 w-full scroll-mt-32"
         >
             <div className="max-w-3xl mx-auto">
                 <motion.h2 
@@ -33,7 +39,8 @@ export default function Technologies() {
                     whileInView={{ x: 0, opacity: 1 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
-                    className="text-green-500 uppercase font-bold text-sm mb-6"
+                    className="text-green-500 uppercase font-bold text-sm mb-6 tracking-wider"
+                    style={{ fontFamily: '"Poppins", sans-serif' }}
                 >
                     Technologies
                 </motion.h2>

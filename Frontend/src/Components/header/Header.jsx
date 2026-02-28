@@ -9,34 +9,60 @@ export default function Header() {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
-      className="w-full px-4 sm:px-6"
+      className="fixed top-0 left-0 right-0 z-50 w-full px-4 sm:px-6 py-4"
     >
-      <div className="max-w-3xl mx-auto py-4 flex items-center justify-between gap-4 sm:gap-0">
-        <Link
-          className="text-lg sm:text-3xl text-green-600 font-bold"
-          style={{ fontFamily: '"Caveat", cursive' }}
-        >
-          Jisan Mahmud
-        </Link>
+      <div className="max-w-4xl mx-auto backdrop-blur-md bg-white/5 border border-white/10 rounded-2xl px-6 py-3 shadow-2xl">
+        <div className="flex items-center justify-between">
+          <Link
+            to="/"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="text-xl sm:text-2xl text-green-500 font-bold hover:text-green-400 transition-colors"
+            style={{ fontFamily: '"Caveat", cursive' }}
+          >
+            Jisan Mahmud
+          </Link>
 
-        <nav>
-          <motion.ul 
+          <motion.nav
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.5 }}
-            className="flex flex-wrap justify-center gap-4 text-sm sm:text-base"
           >
-            <HashLink smooth to="/#projects">
-              <motion.li whileHover={{ scale: 1.1, color: '#16a34a' }} className="hover:text-green-600 cursor-pointer">Projects</motion.li>
-            </HashLink>
-            <HashLink smooth to="/#about">
-              <motion.li whileHover={{ scale: 1.1, color: '#16a34a' }} className="hover:text-green-600 cursor-pointer">About</motion.li>
-            </HashLink>
-            <HashLink smooth to="/#contact">
-              <motion.li whileHover={{ scale: 1.1, color: '#16a34a' }} className="hover:text-green-600 cursor-pointer">Contact</motion.li>
-            </HashLink>
-          </motion.ul>
-        </nav>
+            <ul className="flex gap-6 text-sm sm:text-base" style={{ fontFamily: '"Poppins", sans-serif' }}>
+              <HashLink smooth to="/#about">
+                <motion.li 
+                  whileHover={{ scale: 1.1, color: '#22c55e' }} 
+                  className="cursor-pointer font-medium transition-colors"
+                >
+                  About
+                </motion.li>
+              </HashLink>
+              <HashLink smooth to="/#experience">
+                <motion.li 
+                  whileHover={{ scale: 1.1, color: '#22c55e' }} 
+                  className="cursor-pointer font-medium transition-colors"
+                >
+                  Experience
+                </motion.li>
+              </HashLink>
+              <HashLink smooth to="/#projects">
+                <motion.li 
+                  whileHover={{ scale: 1.1, color: '#22c55e' }} 
+                  className="cursor-pointer font-medium transition-colors"
+                >
+                  Projects
+                </motion.li>
+              </HashLink>
+              <HashLink smooth to="/#contact">
+                <motion.li 
+                  whileHover={{ scale: 1.1, color: '#22c55e' }} 
+                  className="cursor-pointer font-medium transition-colors"
+                >
+                  Contact
+                </motion.li>
+              </HashLink>
+            </ul>
+          </motion.nav>
+        </div>
       </div>
     </motion.header>
   );

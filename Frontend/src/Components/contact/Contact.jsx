@@ -10,7 +10,7 @@ export default function Contact() {
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.8 }}
             id='contact' 
-            className="py-5 px-4 sm:px-6 w-full"
+            className="py-5 px-4 sm:px-6 w-full scroll-mt-32"
         >
             <div className="max-w-3xl mx-auto">
                 <motion.h2 
@@ -18,7 +18,8 @@ export default function Contact() {
                     whileInView={{ x: 0, opacity: 1 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
-                    className="text-green-500 uppercase font-bold text-sm mb-6"
+                    className="text-green-500 uppercase font-bold text-sm mb-6 tracking-wider"
+                    style={{ fontFamily: '"Poppins", sans-serif' }}
                 >
                     Let's Connect
                 </motion.h2>
