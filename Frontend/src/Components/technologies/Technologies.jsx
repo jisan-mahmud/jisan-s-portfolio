@@ -31,7 +31,7 @@ export default function Technologies() {
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.8 }}
             id='technologies' 
-            className="py-10 px-4 sm:px-6 w-full scroll-mt-32"
+            className="py-10 px-4 sm:px-6 w-full scroll-mt-24 sm:scroll-mt-32"
         >
             <div className="max-w-3xl mx-auto">
                 <motion.h2 

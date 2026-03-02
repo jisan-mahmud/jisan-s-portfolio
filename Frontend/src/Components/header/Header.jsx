@@ -1,31 +1,53 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router';
+import { Link, useLocation } from 'react-router';
 import { HashLink } from 'react-router-hash-link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaUser, FaBriefcase, FaGraduationCap, FaCode, FaEnvelope } from 'react-icons/fa';
+import { FaUser, FaBriefcase, FaGraduationCap, FaCode, FaEnvelope, FaCogs } from 'react-icons/fa';
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('');
+  const scrollTimeoutRef = React.useRef(null);
+  const location = useLocation();
+
+  useEffect(() => {
+    const hash = location.hash.replace('#', '');
+    if (hash === 'contact') {
+      setActiveSection('contact');
+    }
+  }, [location]);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 100);
 
-      const sections = ['about', 'experience', 'education', 'projects', 'contact'];
-      const current = sections.find(section => {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          return rect.top <= 200 && rect.bottom >= 100;
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
+
+      scrollTimeoutRef.current = setTimeout(() => {
+        const sections = ['about', 'experience', 'education', 'projects', 'technologies', 'contact'];
+        
+        for (let i = sections.length - 1; i >= 0; i--) {
+          const element = document.getElementById(sections[i]);
+          if (element) {
+            const rect = element.getBoundingClientRect();
+            if (rect.top <= 200) {
+              setActiveSection(sections[i]);
+              break;
+            }
+          }
         }
-        return false;
-      });
-      if (current) setActiveSection(current);
+      }, 100);
     };
     window.addEventListener('scroll', handleScroll);
     handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
+    };
   }, []);
 
   return (
@@ -181,6 +203,23 @@ export default function Header() {
                       <div className="hidden sm:block absolute left-12 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity">
                         <div className="bg-gray-800 text-white text-sm px-3 py-1 rounded-lg whitespace-nowrap">
                           Projects
+                        </div>
+                      </div>
+                    </div>
+                  </HashLink>
+                  <HashLink smooth to="/#technologies">
+                    <div className="relative group">
+                      <motion.li 
+                        whileHover={{ scale: 1.2, y: -5 }} 
+                        className={`cursor-pointer transition-colors ${
+                          activeSection === 'technologies' ? 'text-green-500' : ''
+                        }`}
+                      >
+                        <FaCogs className="text-lg sm:text-xl" />
+                      </motion.li>
+                      <div className="hidden sm:block absolute left-12 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity">
+                        <div className="bg-gray-800 text-white text-sm px-3 py-1 rounded-lg whitespace-nowrap">
+                          Technologies
                         </div>
                       </div>
                     </div>
