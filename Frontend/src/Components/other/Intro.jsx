@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 
 export default function Intro() {
     return (
-        <div className='w-full px-4 sm:px-6 my-10'>
+        <div className='w-full px-4 sm:px-6 my-4 sm:my-10'>
             <div className='max-w-3xl mx-auto flex justify-between gap-8 md:gap-14'>
 
                 {/* Text Section */}
