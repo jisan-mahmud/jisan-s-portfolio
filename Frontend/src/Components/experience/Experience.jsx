@@ -1,5 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
+import { FaBriefcase } from 'react-icons/fa'
 
 const experiences = [
   {
@@ -33,9 +34,10 @@ export default function Experience() {
           whileInView={{ x: 0, opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className='text-green-600 my-4 font-bold uppercase tracking-wider'
+          className='text-green-600 my-4 font-bold uppercase tracking-wider flex items-center gap-2'
           style={{ fontFamily: '"Poppins", sans-serif' }}
         >
+          <FaBriefcase />
           Experience
         </motion.h1>
 
@@ -47,9 +49,9 @@ export default function Experience() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.2, duration: 0.6 }}
-              className='relative pl-8 border-l-2 border-green-500/30 pb-6'
+              className='relative pl-8 border-l border-green-500/30 pb-6'
             >
-              <div className='absolute -left-2 top-0 w-4 h-4 rounded-full bg-green-500'></div>
+              <div className='absolute -left-[3px] top-0 w-[6px] h-[6px] rounded-full bg-green-500'></div>
               
               <motion.div whileHover={{ x: 5 }} className='space-y-2'>
                 <h3 className='text-lg font-semibold text-white' style={{ fontFamily: '"Poppins", sans-serif' }}>

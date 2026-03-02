@@ -1,6 +1,7 @@
 import React from 'react'
 import LinkButton from '../button/LinkButton'
 import { motion } from 'framer-motion'
+import { FaEnvelope } from 'react-icons/fa'
 
 export default function Contact() {
     return (
@@ -18,9 +19,10 @@ export default function Contact() {
                     whileInView={{ x: 0, opacity: 1 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
-                    className="text-green-500 uppercase font-bold text-sm mb-6 tracking-wider"
+                    className="text-green-500 uppercase font-bold text-sm mb-6 tracking-wider flex items-center gap-2"
                     style={{ fontFamily: '"Poppins", sans-serif' }}
                 >
+                    <FaEnvelope />
                     Let's Connect
                 </motion.h2>
 

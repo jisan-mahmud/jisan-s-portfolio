@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import { HashLink } from 'react-router-hash-link';
 import { motion } from 'framer-motion';
+import { FaUser, FaBriefcase, FaGraduationCap, FaCode, FaEnvelope } from 'react-icons/fa';
 
 export default function Header() {
   return (
@@ -31,32 +32,45 @@ export default function Header() {
               <HashLink smooth to="/#about">
                 <motion.li 
                   whileHover={{ scale: 1.1, color: '#22c55e' }} 
-                  className="cursor-pointer font-medium transition-colors"
+                  className="cursor-pointer font-medium transition-colors flex items-center gap-2"
                 >
+                  <FaUser className="text-xs" />
                   About
                 </motion.li>
               </HashLink>
               <HashLink smooth to="/#experience">
                 <motion.li 
                   whileHover={{ scale: 1.1, color: '#22c55e' }} 
-                  className="cursor-pointer font-medium transition-colors"
+                  className="cursor-pointer font-medium transition-colors flex items-center gap-2"
                 >
+                  <FaBriefcase className="text-xs" />
                   Experience
+                </motion.li>
+              </HashLink>
+              <HashLink smooth to="/#education">
+                <motion.li 
+                  whileHover={{ scale: 1.1, color: '#22c55e' }} 
+                  className="cursor-pointer font-medium transition-colors flex items-center gap-2"
+                >
+                  <FaGraduationCap className="text-xs" />
+                  Education
                 </motion.li>
               </HashLink>
               <HashLink smooth to="/#projects">
                 <motion.li 
                   whileHover={{ scale: 1.1, color: '#22c55e' }} 
-                  className="cursor-pointer font-medium transition-colors"
+                  className="cursor-pointer font-medium transition-colors flex items-center gap-2"
                 >
+                  <FaCode className="text-xs" />
                   Projects
                 </motion.li>
               </HashLink>
               <HashLink smooth to="/#contact">
                 <motion.li 
                   whileHover={{ scale: 1.1, color: '#22c55e' }} 
-                  className="cursor-pointer font-medium transition-colors"
+                  className="cursor-pointer font-medium transition-colors flex items-center gap-2"
                 >
+                  <FaEnvelope className="text-xs" />
                   Contact
                 </motion.li>
               </HashLink>

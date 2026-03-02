@@ -4,7 +4,7 @@ import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import '../../style/swiper-custom.css';
-import { FaGithub } from "react-icons/fa";
+import { FaGithub, FaCode } from "react-icons/fa";
 import IconButton from '../button/IconButton';
 import { TbWorld } from "react-icons/tb";
 import { motion } from 'framer-motion';
@@ -58,9 +58,10 @@ export default function RecentProjects() {
           whileInView={{ x: 0, opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-green-500 uppercase font-bold text-sm mb-6 tracking-wider"
+          className="text-green-500 uppercase font-bold text-sm mb-6 tracking-wider flex items-center gap-2"
           style={{ fontFamily: '"Poppins", sans-serif' }}
         >
+          <FaCode />
           Recent Projects
         </motion.h2>
 

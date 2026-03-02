@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaPython, FaJs, FaReact, FaHtml5, FaCss3Alt, FaGitAlt, FaDocker, FaLinux } from 'react-icons/fa';
+import { FaPython, FaJs, FaReact, FaHtml5, FaCss3Alt, FaGitAlt, FaDocker, FaLinux, FaCogs } from 'react-icons/fa';
 import { TbBrandCpp } from "react-icons/tb";
 import { FaC } from "react-icons/fa6";
 import { SiDjango, SiTailwindcss, SiPostgresql, SiNginx, SiJsonwebtokens} from 'react-icons/si';
@@ -39,9 +39,10 @@ export default function Technologies() {
                     whileInView={{ x: 0, opacity: 1 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
-                    className="text-green-500 uppercase font-bold text-sm mb-6 tracking-wider"
+                    className="text-green-500 uppercase font-bold text-sm mb-6 tracking-wider flex items-center gap-2"
                     style={{ fontFamily: '"Poppins", sans-serif' }}
                 >
+                    <FaCogs />
                     Technologies
                 </motion.h2>
 

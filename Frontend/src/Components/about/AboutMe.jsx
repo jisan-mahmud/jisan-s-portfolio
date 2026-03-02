@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { IoIosArrowDown } from "react-icons/io";
 import { motion } from 'framer-motion';
+import { FaUser } from 'react-icons/fa';
 
 export default function AboutMe() {
     const [showMore, setShowMore] = useState(false);
@@ -20,9 +21,10 @@ export default function AboutMe() {
                     whileInView={{ x: 0, opacity: 1 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
-                    className='text-green-600 my-4 font-bold uppercase tracking-wider'
+                    className='text-green-600 my-4 font-bold uppercase tracking-wider flex items-center gap-2'
                     style={{ fontFamily: '"Poppins", sans-serif' }}
                 >
+                    <FaUser />
                     About Me
                 </motion.h1>
 
