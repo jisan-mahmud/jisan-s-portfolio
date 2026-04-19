@@ -7,7 +7,7 @@ export default function SocialIcons() {
     return (
         <div className='flex gap-1.5 sm:gap-3 items-center'>
             <IconButton link={'https://github.com/jisan-mahmud'} icon={<FaGithub />} />
-            <IconButton link={'https://www.linkedin.com/in/jisan-mahmud203/'} icon={<FaLinkedin />} />
+            <IconButton link={'https://www.linkedin.com/in/jisanmahmud/'} icon={<FaLinkedin />} />
             <IconButton link={'https://x.com/jisan__mahmud'} icon={<FaSquareXTwitter />} />
         </div>
     )
