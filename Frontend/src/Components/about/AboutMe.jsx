@@ -36,7 +36,7 @@ export default function AboutMe() {
                         viewport={{ once: true }}
                         transition={{ delay: 0.2, duration: 0.6 }}
                     >
-                    I'm a developer who's passionate about building for the web, with a strong focus on backend development using Django, PostgreSQL, and REST APIs. Over the past year, I've worked on and deployed several full-stack projects where I've been able to combine creativity with technical problem-solving. I also enjoy working with tools like Tailwind CSS, React, Celery, and Nginx, and I'm always curious to learn and experiment with new technologies that help me grow as a developer.
+                    I am a Backend Developer focused on building scalable, high-performance web systems using Django, PostgreSQL, and REST APIs. I have hands-on experience designing and deploying production-grade full-stack applications, combining clean architecture with practical problem-solving.
                     </motion.div>
 
                     {/* Toggleable part */}
@@ -50,11 +50,15 @@ export default function AboutMe() {
                     >
                         <div className='flex flex-col gap-3 mt-2'>
                             <span>
-                            My interests span across competitive programming (C/C++), system design, cloud computing, AI/ML —fields where logic, performance, and innovation intersect. I actively challenge myself through hands-on projects and by participating in competitive programming contests to sharpen my problem-solving abilities.
+                            I work with technologies such as React, Tailwind CSS, Celery, Redis, Docker, and Nginx, with a strong emphasis on backend performance, system design, and reliability. I continuously explore modern engineering practices to improve scalability, maintainability, and developer experience.
                             </span>
 
                             <span>
-                            Beyond development, I'm driven by entrepreneurial ambition and aspire to build a meaningful startup that blends technology and impact. I'm continuously learning, pushing boundaries, and working toward my dream of contributing to world-class tech teams.
+                            My interests extend into competitive programming (C/C++), system design, cloud computing, and AI/ML—areas where logic, efficiency, and innovation intersect. I actively participate in coding contests and build projects to sharpen my problem-solving and engineering skills.
+                            </span>
+
+                            <span>
+                            Beyond technical growth, I’m driven by a long-term goal of building impactful products and contributing to world-class engineering teams, while working toward creating a meaningful technology-driven startup.
                             </span>
                         </div>
                     </motion.div>

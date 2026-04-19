@@ -7,14 +7,14 @@ import { motion } from 'framer-motion';
 export default function Intro() {
     return (
         <div className='w-full px-4 sm:px-6 my-4 sm:my-10'>
-            <div className='max-w-3xl mx-auto flex justify-between gap-8 md:gap-14'>
+            <div className='max-w-3xl mx-auto flex flex-col sm:flex-row justify-between gap-6 md:gap-14'>
 
                 {/* Text Section */}
                 <motion.div 
                     initial={{ x: -100, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
                     transition={{ duration: 0.8, ease: 'easeOut' }}
-                    className='flex-1 md:text-left'
+                    className='flex-1 text-center sm:text-left'
                 >
                     <TypeAnimation
                         sequence={[
@@ -33,7 +33,7 @@ export default function Intro() {
                         transition={{ delay: 0.5, duration: 0.6 }}
                         className='my-1 leading-tight sm:my-3 text-sm sm:text-lg text-gray-300'
                     >
-                        A self-taught fullstack developer, specializing in building scalable and efficient backend systems.
+                        Backend Engineer focused on scalable REST APIs using Python, Django, and DRF, with experience in real-time systems, authentication, and backend performance optimization.
                     </motion.p>
                     <motion.span 
                         initial={{ opacity: 0 }}
@@ -41,13 +41,13 @@ export default function Intro() {
                         transition={{ delay: 0.7, duration: 0.6 }}
                         className='block my-2 text-sm sm:text-base'
                     >
-                        Mymensingh, Bangladesh
+                        Dhaka, Bangladesh
                     </motion.span>
                     <motion.div 
                         initial={{ y: 20, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                         transition={{ delay: 0.9, duration: 0.6 }}
-                        className='flex gap-2 sm:gap-4 my-2 sm:my-4 items-center'
+                        className='flex gap-2 sm:gap-4 my-2 sm:my-4 items-center justify-center sm:justify-start'
                     >
                         <div>
                             <LinkButton link={'https://drive.google.com/file/d/1V17wK80xyEYZCGdbbmqR7eEvG5hxZndA/view?usp=sharing'} label={'Resume'} />
@@ -66,12 +66,12 @@ export default function Intro() {
                     animate={{ scale: 1, opacity: 1 }}
                     transition={{ delay: 0.4, duration: 0.8, ease: 'easeOut' }}
                     whileHover={{ scale: 1.05, rotate: 5 }}
-                    className='flex-1 flex my-auto justify-end'
+                    className='flex justify-center sm:justify-end'
                 >
                     <img
                         src='images/jisan.jpg'
                         alt='Jisan Mahmud'
-                        className='flex w-28 sm:w-32 md:w-40 h-28 sm:h-32 md:h-40 rounded-full shadow-lg object-cover'
+                        className='w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-full shadow-lg object-cover'
                     />
                 </motion.div>
             </div>

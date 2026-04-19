@@ -2,8 +2,9 @@ import React from 'react';
 import { FaPython, FaJs, FaReact, FaHtml5, FaCss3Alt, FaGitAlt, FaDocker, FaLinux, FaCogs } from 'react-icons/fa';
 import { TbBrandCpp } from "react-icons/tb";
 import { FaC } from "react-icons/fa6";
-import { SiDjango, SiTailwindcss, SiPostgresql, SiNginx, SiJsonwebtokens} from 'react-icons/si';
+import { SiDjango, SiTailwindcss, SiPostgresql, SiNginx, SiJsonwebtokens, SiAmazonwebservices, SiSwagger, SiPostman } from 'react-icons/si';
 import { motion } from 'framer-motion';
+
 
 export default function Technologies() {
     const technologies = [
@@ -13,6 +14,10 @@ export default function Technologies() {
         { name: 'JavaScript', icon: <FaJs /> },
         { name: 'React', icon: <FaReact /> },
         { name: 'Django', icon: <SiDjango /> },
+        { name: 'DRF', icon: <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/djangorest/djangorest-original-wordmark.svg" className="w-10 h-10" /> },
+        { name: 'AWS', icon: <SiAmazonwebservices /> },
+        { name: 'Swagger', icon: <SiSwagger /> },
+        { name: 'Postman', icon: <SiPostman /> },
         { name: 'HTML5', icon: <FaHtml5 /> },
         { name: 'CSS3', icon: <FaCss3Alt /> },
         { name: 'Tailwind CSS', icon: <SiTailwindcss /> },
