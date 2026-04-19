@@ -50,7 +50,7 @@ export default function Intro() {
                         className='flex gap-2 sm:gap-4 my-2 sm:my-4 items-center'
                     >
                         <div>
-                            <LinkButton link={'https://drive.google.com/file/d/19d1qAVrUHswMDTLxkMcJxyE6xHycCoOv/view?usp=sharing'} label={'Resume'} />
+                            <LinkButton link={'https://drive.google.com/file/d/1V17wK80xyEYZCGdbbmqR7eEvG5hxZndA/view?usp=sharing'} label={'Resume'} />
                         </div>
 
                         <div>
