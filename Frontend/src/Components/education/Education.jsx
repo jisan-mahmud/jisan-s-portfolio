@@ -7,7 +7,7 @@ const education = [
     degree: 'B.Sc. in Computer Science & Engineering',
     institution: 'Uttara University',
     period: 'Expected: 2029',
-    location: 'Bangladesh',
+    location: 'Uttara, Dhaka, Bangladesh',
     highlights: [
       'Coursework (ongoing): Data Structures & Algorithms, Database Systems, Operating Systems, Backend Development',
     ],
