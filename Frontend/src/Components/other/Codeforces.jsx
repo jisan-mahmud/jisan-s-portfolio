@@ -66,7 +66,7 @@ export default function Codeforces({ handle }) {
           whileInView={{ x: 0, opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="section-title flex items-center gap-2"
+          className="text-green-500 uppercase font-bold text-sm mb-6 tracking-wider flex items-center gap-2"
           style={{ fontFamily: '"Poppins", sans-serif' }}
         >
           <FaCode />
@@ -118,7 +118,7 @@ export default function Codeforces({ handle }) {
                       href={`https://codeforces.com/profile/${user.handle}`}
                       target="_blank"
                       rel="noreferrer"
-                      className="font-semibold text-green-400 text-xl hover:text-green-300 transition"
+                      className="font-semibold text-white text-xl hover:text-gray-500 transition"
                       style={{ fontFamily: '"Poppins", sans-serif' }}
                     >
                       {user.handle}
@@ -131,7 +131,7 @@ export default function Codeforces({ handle }) {
                       className="p-4 rounded-lg border border-white/10"
                     >
                       <div className="text-xs text-slate-400 uppercase tracking-wide font-medium">Current Rating</div>
-                      <div className="text-2xl font-bold text-green-400 mt-1">{user.rating ?? '—'}</div>
+                      <div className="text-2xl font-bold text-white mt-1">{user.rating ?? '—'}</div>
                       <div className="text-xs text-slate-500 mt-1">{user.rank || 'Unrated'}</div>
                     </motion.div>
                     <motion.div
@@ -139,7 +139,7 @@ export default function Codeforces({ handle }) {
                       className="p-4 rounded-lg border border-white/10"
                     >
                       <div className="text-xs text-slate-400 uppercase tracking-wide font-medium">Max Rating</div>
-                      <div className="text-2xl font-bold text-blue-400 mt-1">{user.maxRating ?? '—'}</div>
+                      <div className="text-2xl font-bold text-white mt-1">{user.maxRating ?? '—'}</div>
                       <div className="text-xs text-slate-500 mt-1">{user.maxRank || '—'}</div>
                     </motion.div>
                     <motion.div
@@ -147,7 +147,7 @@ export default function Codeforces({ handle }) {
                       className="p-4 rounded-lg border border-white/10"
                     >
                       <div className="text-xs text-slate-400 uppercase tracking-wide font-medium">Total Contests</div>
-                      <div className="text-2xl font-bold text-purple-400 mt-1">{contests ? contests.length : '—'}</div>
+                      <div className="text-2xl font-bold text-white mt-1">{contests ? contests.length : '—'}</div>
                       <div className="text-xs text-slate-500 mt-1">Latest: {contests && contests.length ? formatDateSeconds(contests[contests.length - 1].ratingUpdateTimeSeconds) : '—'}</div>
                     </motion.div>
                   </div>
@@ -216,9 +216,9 @@ export default function Codeforces({ handle }) {
                             rel="noreferrer"
                             className="min-w-[280px] flex-shrink-0 rounded-2xl border border-white/10 p-4 shadow-lg transition"
                           >
-                            <div className="text-sm font-semibold text-green-400 truncate">{c.contestName}</div>
+                            <div className="text-sm font-semibold text-white truncate">{c.contestName}</div>
                             <div className="text-xs text-slate-500 mt-2">{formatDateSeconds(c.ratingUpdateTimeSeconds)}</div>
-                            <div className={`mt-3 text-lg font-semibold ${deltaColor}`}>
+                            <div className={`mt-3 text-sm font-semibold ${deltaColor}`}>
                               {delta !== null ? (delta > 0 ? `+${delta}` : `${delta}`) : '—'}
                             </div>
                           </motion.a>
