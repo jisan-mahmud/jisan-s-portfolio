@@ -7,6 +7,7 @@ import Contact from '../Components/contact/Contact';
 import Footer from '../Components/footer/Footer';
 import Experience from '../Components/experience/Experience';
 import Education from '../Components/education/Education';
+import Codeforces from '../Components/other/Codeforces';
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
       <Education/>
       <RecentProjects/>
       <Technologies/>
+      <Codeforces />
       <Contact/>
       <Footer/>
     </div>
