@@ -10,3 +10,13 @@ Currently, two official plugins are available:
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+## Codeforces integration
+
+Add Codeforces credentials to a local env file (do NOT commit secrets): create a `.env` at the project root and set the following variables:
+
+- `VITE_CODEFORCES_KEY` — your API key (optional)
+- `VITE_CODEFORCES_SECRET` — your API secret (optional)
+- `VITE_CODEFORCES_HANDLE` — default Codeforces handle to display
+
+An example file is provided at `.env.example`. This project reads `VITE_CODEFORCES_HANDLE` on the client and uses the public Codeforces API to fetch user info. Keep private keys out of the repo.
