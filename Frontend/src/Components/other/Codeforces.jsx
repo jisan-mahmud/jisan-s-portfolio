@@ -58,9 +58,9 @@ export default function Codeforces({ handle }) {
       viewport={{ once: true, amount: 0.3 }}
       transition={{ duration: 0.8 }}
       id="codeforces"
-      className="w-full p-4 sm:px-6 my-10 scroll-mt-32 border-gray-700 border rounded-2xl max-w-3xl mx-auto"
+      className="py-10 px-4 sm:px-6 w-full scroll-mt-24 sm:scroll-mt-32"
     >
-      <div className="section-card">
+      <div className="section-card max-w-3xl mx-auto border border-gray-700 p-6 rounded-xl">
         <motion.h2
           initial={{ x: -50, opacity: 0 }}
           whileInView={{ x: 0, opacity: 1 }}
@@ -196,7 +196,7 @@ export default function Codeforces({ handle }) {
                     </div>
                     <div
                       ref={carouselRef}
-                      className="no-scrollbar flex gap-4 overflow-x-auto scroll-smooth pb-4 pr-12"
+                      className="no-scrollbar flex gap-4 overflow-x-auto scroll-smooth pb-4 pr-12 pl-2 sm:pl-0"
                       style={{ scrollBehavior: 'smooth' }}
                     >
                       {contests.slice(-8).reverse().map((c, idx) => {
@@ -214,7 +214,7 @@ export default function Codeforces({ handle }) {
                             href={link}
                             target="_blank"
                             rel="noreferrer"
-                            className="min-w-[280px] flex-shrink-0 rounded-2xl border border-white/10 p-4 shadow-lg transition"
+                              className="min-w-[220px] sm:min-w-[280px] flex-shrink-0 rounded-2xl border border-white/10 p-4 shadow-lg transition"
                           >
                             <div className="text-sm font-semibold text-white truncate">{c.contestName}</div>
                             <div className="text-xs text-slate-500 mt-2">{formatDateSeconds(c.ratingUpdateTimeSeconds)}</div>
