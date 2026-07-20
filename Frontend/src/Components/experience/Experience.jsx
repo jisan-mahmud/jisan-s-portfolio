@@ -6,7 +6,7 @@ const experiences = [
   {
     title: 'Backend Developer (Python, Django)',
     company: 'Softvence Agency',
-    period: 'Nov 2025 - Present',
+    period: 'Nov 2025 - Jul 2026',
     location: 'Mohakhali, Dhaka, Bangladesh',
     highlights: [
       'Built production-grade REST APIs with JWT authentication, Google OAuth, and RBAC for multi-role systems.',
