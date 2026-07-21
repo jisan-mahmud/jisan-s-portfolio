@@ -18,7 +18,7 @@ export default function Home() {
       <Education/>
       <RecentProjects/>
       <Technologies/>
-      <Codeforces />
+      {/* <Codeforces /> */}
       <Contact/>
       <Footer/>
     </div>

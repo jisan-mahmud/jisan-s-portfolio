@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { FaPython, FaJs, FaReact, FaHtml5, FaCss3Alt, FaGitAlt, FaDocker, FaLinux } from 'react-icons/fa';
-import { TbBrandCpp, TbCode, TbLayoutGrid, TbLayoutList } from "react-icons/tb";
+import { FaPython, FaJs, FaReact, FaHtml5, FaCss3Alt, FaGitAlt, FaDocker, FaLinux, FaCogs } from 'react-icons/fa';
+import { TbBrandCpp, TbLayoutGrid, TbLayoutList } from "react-icons/tb";
 import { FaC } from "react-icons/fa6";
 import { SiDjango, SiTailwindcss, SiPostgresql, SiNginx, SiJsonwebtokens, SiAmazonwebservices, SiSwagger, SiPostman } from 'react-icons/si';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -87,7 +87,7 @@ export default function Technologies() {
             className="text-green-500 uppercase font-bold text-sm tracking-wider flex items-center gap-2"
             style={{ fontFamily: '"Poppins", sans-serif' }}
           >
-            <TbCode />
+            <FaCogs />
             Technologies
           </motion.h2>
 
