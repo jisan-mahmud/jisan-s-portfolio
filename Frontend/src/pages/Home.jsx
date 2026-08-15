@@ -8,6 +8,7 @@ import Footer from '../Components/footer/Footer';
 import Experience from '../Components/experience/Experience';
 import Education from '../Components/education/Education';
 import Codeforces from '../Components/other/Codeforces';
+import Leetcode from '../Components/other/Leetcode';
 
 export default function Home() {
   return (
@@ -18,7 +19,8 @@ export default function Home() {
       <Education/>
       <RecentProjects/>
       <Technologies/>
-      {/* <Codeforces /> */}
+      <Codeforces />
+      <Leetcode />
       <Contact/>
       <Footer/>
     </div>
