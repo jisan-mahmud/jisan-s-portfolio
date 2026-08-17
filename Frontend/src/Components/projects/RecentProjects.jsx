@@ -1,40 +1,10 @@
 import React, { useState } from 'react';
 import { FaGithub, FaCode } from "react-icons/fa";
-import { TbWorld, TbLayoutGrid, TbLayoutList } from "react-icons/tb";
+import { TbWorld, TbLayoutGrid, TbLayoutList, TbArrowUpRight } from "react-icons/tb";
 import IconButton from '../button/IconButton';
 import { motion, AnimatePresence } from 'framer-motion';
-
-const projects = [
-  {
-    title: 'Picgenre - Automate Your Stock Success',
-    description: 'Transform your microstock workflow with AI-powered tools that make metadata management fast, efficient, and more profitable.',
-    image: '/images/picgenre_project.jpg',
-    live_link: 'https://picgenre.com',
-    tags: ['AI', 'Automation'],
-  },
-  {
-    title: 'DeepErase: AI-Powered Background Removal Tool',
-    description: 'DeepErase is an intuitive GUI desktop application designed to help users effortlessly remove backgrounds from images using advanced AI technology.',
-    image: '/images/deeperase_project.jpg',
-    github_link: 'https://github.com/jisan-mahmud/Background-remover-gui-app',
-    tags: ['AI', 'Desktop'],
-  },
-  {
-    title: 'IngredientAI: Instant Recipes from Food Images',
-    description: 'IngredientAI converts food images into detailed recipes and provides step-by-step instructions for making them.',
-    image: '/images/ingredientai_project.jpg',
-    github_link: 'https://github.com/jisan-mahmud/ingredientai',
-    live_link: 'https://ingredientai.pythonanywhere.com/',
-    tags: ['AI', 'Web'],
-  },
-  {
-    title: 'Ecare - Appointment Booking Project',
-    description: "The Appointment Booking System for the eCare Hospital Management System streamlines scheduling appointments between patients and doctors.",
-    image: '/images/ecare_project.jpg',
-    github_link: 'https://github.com/jisan-mahmud/ecare_backend',
-    tags: ['Backend', 'Web'],
-  },
-];
+import { Link } from 'react-router';
+import projects from '../../data/projects';
 
 function ProjectLinks({ project }) {
   return (
@@ -67,7 +37,10 @@ function GridCard({ project, index }) {
           ))}
         </div>
         <h3 className="text-white font-semibold text-sm leading-snug" style={{ fontFamily: '"Poppins", sans-serif' }}>{project.title}</h3>
-        <p className="text-gray-400 text-xs mt-1.5 leading-relaxed line-clamp-2">{project.description}</p>
+        <p className="text-gray-400 text-xs mt-1.5 leading-relaxed line-clamp-2">{project.description || project.shortDesc}</p>
+        <Link to={`/projects/${project.slug}`} className="inline-flex items-center gap-1 mt-3 text-xs text-green-400 hover:text-green-300 transition-colors">
+          View details <TbArrowUpRight size={13} />
+        </Link>
       </div>
     </motion.div>
   );
@@ -95,7 +68,10 @@ function ListCard({ project, index }) {
           ))}
         </div>
         <h3 className="text-white font-semibold text-sm leading-snug truncate" style={{ fontFamily: '"Poppins", sans-serif' }}>{project.title}</h3>
-        <p className="text-gray-400 text-xs mt-1 leading-relaxed line-clamp-2">{project.description}</p>
+        <p className="text-gray-400 text-xs mt-1 leading-relaxed line-clamp-2">{project.description || project.shortDesc}</p>
+        <Link to={`/projects/${project.slug}`} className="inline-flex items-center gap-1 mt-2 text-xs text-green-400 hover:text-green-300 transition-colors">
+          View details <TbArrowUpRight size={13} />
+        </Link>
       </div>
     </motion.div>
   );

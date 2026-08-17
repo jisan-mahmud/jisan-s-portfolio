@@ -1,5 +1,6 @@
 import Header from '../Components/header/Header'
 import CodeAnimation from '../Components/CodeAnimation'
+import Footer from '../Components/footer/Footer'
 import React from 'react'
 import { Outlet } from 'react-router'
 
@@ -10,6 +11,7 @@ export default function MainLayout() {
       <Header />
       <div className="pt-24">
         <Outlet />
+        <Footer />
       </div>
     </div>
   )
