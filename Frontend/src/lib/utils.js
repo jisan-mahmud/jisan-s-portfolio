@@ -7,33 +7,33 @@ export function cn(...inputs) {
 
 export async function fetchLeetcodeUser(username) {
   if (!username) throw new Error('No LeetCode username provided');
-  const base = `https://leetcode-api-faisalshohag.vercel.app/${encodeURIComponent(username)}`;
-  const res = await fetch(base);
-  const profile = await res.json();
-  if (!profile.easySolved && profile.easySolved !== 0) throw new Error('User not found');
-
-  let name = null, avatar = null, problemTags = { advanced: [], intermediate: [], fundamental: [] };
-  try {
-    const r = await fetch(`https://alfa-leetcode-api.onrender.com/${encodeURIComponent(username)}`);
-    const text = await r.text();
-    const extra = JSON.parse(text);
-    name = extra?.name || null;
-    avatar = extra?.avatar || null;
-  } catch (_) {}
-
-  try {
-    const sr = await fetch(`https://alfa-leetcode-api.onrender.com/skillStats/${encodeURIComponent(username)}`);
-    const text = await sr.text();
-    const skills = JSON.parse(text);
-    const t = skills?.matchedUser?.tagProblemCounts || {};
-    problemTags = {
+  const query = `{ matchedUser(username: "${username}") { username profile { realName userAvatar ranking } submitStatsGlobal { acSubmissionNum { difficulty count } } tagProblemCounts { advanced { tagName problemsSolved } intermediate { tagName problemsSolved } fundamental { tagName problemsSolved } } } }`;
+  const res = await fetch('/leetcode-api/graphql', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Referer': 'https://leetcode.com' },
+    body: JSON.stringify({ query }),
+  });
+  const json = await res.json();
+  const user = json?.data?.matchedUser;
+  if (!user) throw new Error('User not found');
+  const counts = user.submitStatsGlobal?.acSubmissionNum || [];
+  const get = (d) => counts.find(c => c.difficulty === d)?.count ?? 0;
+  const t = user.tagProblemCounts || {};
+  return {
+    username: user.username,
+    name: user.profile.realName,
+    avatar: user.profile.userAvatar,
+    ranking: user.profile.ranking,
+    easySolved: get('Easy'),
+    mediumSolved: get('Medium'),
+    hardSolved: get('Hard'),
+    totalSolved: get('All'),
+    problemTags: {
       advanced: t.advanced || [],
       intermediate: t.intermediate || [],
       fundamental: t.fundamental || [],
-    };
-  } catch (_) {}
-
-  return { ...profile, name, avatar, problemTags };
+    },
+  };
 }
 
 export async function fetchCodeforcesUser(handle) {
