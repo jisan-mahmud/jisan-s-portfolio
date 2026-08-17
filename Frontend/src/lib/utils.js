@@ -8,7 +8,7 @@ export function cn(...inputs) {
 export async function fetchLeetcodeUser(username) {
   if (!username) throw new Error('No LeetCode username provided');
   const query = `{ matchedUser(username: "${username}") { username profile { realName userAvatar ranking } submitStatsGlobal { acSubmissionNum { difficulty count } } tagProblemCounts { advanced { tagName problemsSolved } intermediate { tagName problemsSolved } fundamental { tagName problemsSolved } } } }`;
-  const res = await fetch('/leetcode-api/graphql', {
+  const res = await fetch('/api/leetcode', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'Referer': 'https://leetcode.com' },
     body: JSON.stringify({ query }),

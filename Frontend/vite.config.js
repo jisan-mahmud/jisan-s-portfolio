@@ -6,10 +6,10 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   server: {
     proxy: {
-      '/leetcode-api': {
+      '/api/leetcode': {
         target: 'https://leetcode.com',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/leetcode-api/, ''),
+        rewrite: () => '/graphql',
       },
     },
   },
