@@ -1,0 +1,5 @@
+{
+  "rewrites": [
+    { "source": "/leetcode-api/:path*", "destination": "https://leetcode.com/:path*" }
+  ]
+}
