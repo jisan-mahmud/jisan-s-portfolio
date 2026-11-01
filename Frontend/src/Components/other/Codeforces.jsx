@@ -21,6 +21,34 @@ function getRankColor(rank) {
   return 'text-gray-400';
 }
 
+function CodeforcesAvatar({ user }) {
+  const imageUrls = [...new Set([user.avatar, user.titlePhoto].filter(Boolean))];
+  const [imageIndex, setImageIndex] = useState(0);
+  const imageUrl = imageUrls[imageIndex];
+  const avatarClassName = 'w-16 h-16 rounded-full border-2 border-green-500/30 object-cover shrink-0';
+
+  if (!imageUrl) {
+    return (
+      <div
+        role="img"
+        aria-label={`${user.handle} avatar`}
+        className={`${avatarClassName} bg-gray-800 flex items-center justify-center text-sm font-semibold text-green-400`}
+      >
+        {user.handle.slice(0, 2).toUpperCase()}
+      </div>
+    );
+  }
+
+  return (
+    <img
+      src={imageUrl}
+      alt={`${user.handle} avatar`}
+      className={avatarClassName}
+      onError={() => setImageIndex((index) => index + 1)}
+    />
+  );
+}
+
 export default function Codeforces({ handle }) {
   const envHandle = import.meta.env.VITE_CODEFORCES_HANDLE || '';
   const initial = (handle || envHandle || '').trim();
@@ -99,13 +127,7 @@ export default function Codeforces({ handle }) {
           >
             {/* Profile card */}
             <div className="rounded-xl border border-gray-700/60 bg-gray-900/40 p-4 mb-3 flex items-center gap-4">
-              {user.avatar && (
-                <img
-                  src={user.avatar}
-                  alt={user.handle}
-                  className="w-16 h-16 rounded-full border-2 border-green-500/30 object-cover shrink-0"
-                />
-              )}
+              <CodeforcesAvatar key={user.handle} user={user} />
               <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-2 flex-wrap">
                   <a
