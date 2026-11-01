@@ -7,7 +7,7 @@ const projects = [
 
 The platform integrates with major stock agencies and provides a dashboard to track submission status, earnings, and performance analytics. Built with a focus on reliability and speed, it handles bulk uploads and processes thousands of images per session.`,
     image: '/images/picgenre_project.jpg',
-    live_link: 'https://picgenre.com',
+    live_link: 'https://picgenre-2-0-frontend.vercel.app/',
     tags: ['AI', 'Automation', 'SaaS', 'Python', 'Django'],
     features: [
       'AI-powered metadata generation (title, description, keywords)',
