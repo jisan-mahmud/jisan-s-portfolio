@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { FaGithub } from 'react-icons/fa';
 import { TbWorld, TbArrowLeft, TbCalendar, TbUser, TbStack2, TbListCheck, TbFileText, TbExternalLink } from 'react-icons/tb';
 import { apiGet, resolveMediaUrl } from '../lib/api';
+import { ProjectDetailSkeleton } from '../Components/loading/Skeletons';
 
 function SectionHeader({ icon, label }) {
   return (
@@ -33,14 +34,7 @@ export default function ProjectDetail() {
   }, [slug]);
 
   if (loading) {
-    return (
-      <div className="min-h-[60vh] flex items-center justify-center">
-        <div className="flex items-center gap-3 text-sm text-gray-400">
-          <span className="inline-block animate-spin text-green-400">⟳</span>
-          Loading project...
-        </div>
-      </div>
-    );
+    return <ProjectDetailSkeleton />;
   }
 
   if (error || !project) {

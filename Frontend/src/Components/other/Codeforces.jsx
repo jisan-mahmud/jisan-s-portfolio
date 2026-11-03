@@ -3,6 +3,7 @@ import { apiGet } from '../../lib/api';
 import { motion } from 'framer-motion';
 import { FaCode } from 'react-icons/fa';
 import { TbTrophy, TbStar, TbCalendarStats, TbChevronLeft, TbChevronRight, TbExternalLink } from 'react-icons/tb';
+import { IntegrationSkeleton } from '../loading/Skeletons';
 
 function formatDate(sec) {
   if (!sec) return '—';
@@ -114,9 +115,7 @@ export default function Codeforces({ handle }) {
         )}
 
         {loading && (
-          <div className="rounded-xl border border-gray-700/60 bg-gray-900/40 p-8 text-center text-sm text-gray-500">
-            <div className="inline-block animate-spin mr-2">⟳</div>Loading...
-          </div>
+          <IntegrationSkeleton platform="codeforces" />
         )}
 
         {user && (

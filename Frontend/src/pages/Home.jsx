@@ -9,19 +9,13 @@ import Education from '../Components/education/Education';
 import Codeforces from '../Components/other/Codeforces';
 import Leetcode from '../Components/other/Leetcode';
 import { useHomeData } from '../lib/hooks';
+import { HomeSkeleton } from '../Components/loading/Skeletons';
 
 export default function Home() {
   const { data, error, loading } = useHomeData();
 
   if (loading) {
-    return (
-      <div className="min-h-[60vh] flex items-center justify-center">
-        <div className="flex items-center gap-3 text-sm text-gray-400">
-          <span className="inline-block animate-spin text-green-400">⟳</span>
-          Loading portfolio...
-        </div>
-      </div>
-    );
+    return <HomeSkeleton />;
   }
 
   if (error) {
