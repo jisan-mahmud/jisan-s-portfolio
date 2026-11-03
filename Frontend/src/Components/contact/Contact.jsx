@@ -2,7 +2,7 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import { FaEnvelope, FaGithub, FaLinkedin } from 'react-icons/fa'
 import { FaSquareXTwitter } from 'react-icons/fa6'
-import { TbSend, TbBrandGithub } from 'react-icons/tb'
+import { TbSend } from 'react-icons/tb'
 
 const socials = [
   { label: 'GitHub',   icon: <FaGithub size={16} />,          href: 'https://github.com/jisan-mahmud',            color: 'hover:text-white hover:border-gray-400' },
@@ -41,7 +41,6 @@ export default function Contact() {
           transition={{ delay: 0.15, duration: 0.5 }}
           className="rounded-2xl border border-gray-700/60 bg-gray-900/40 p-6 sm:p-8 text-center"
         >
-          {/* availability */}
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-green-500/30 bg-green-500/10 mb-5">
             <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
             <span className="text-green-400 text-xs font-medium">Open to new opportunities</span>
@@ -57,7 +56,6 @@ export default function Contact() {
             Whether it's a job offer, freelance project, or just a tech chat — my inbox is always open.
           </p>
 
-          {/* primary CTA */}
           <motion.a
             href="mailto:jisan.mahmud203@gmail.com"
             whileHover={{ scale: 1.04 }}
@@ -68,14 +66,12 @@ export default function Contact() {
             Say Hello
           </motion.a>
 
-          {/* divider */}
           <div className="flex items-center gap-3 mb-6">
             <div className="flex-1 h-px bg-gray-700/60" />
             <span className="text-xs text-gray-600">or find me on</span>
             <div className="flex-1 h-px bg-gray-700/60" />
           </div>
 
-          {/* social links */}
           <div className="flex items-center justify-center gap-3">
             {socials.map(s => (
               <motion.a

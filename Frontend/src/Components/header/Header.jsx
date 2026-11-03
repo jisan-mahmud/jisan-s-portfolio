@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router';
 import { HashLink } from 'react-router-hash-link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaUser, FaBriefcase, FaGraduationCap, FaCode, FaEnvelope, FaCogs } from 'react-icons/fa';
+import { useProfile } from '../../lib/hooks';
 
 const navItems = [
   { id: 'about',        label: 'About',        icon: <FaUser size={15} />,          href: '/#about' },
@@ -14,6 +15,7 @@ const navItems = [
 ];
 
 export default function Header() {
+  const { data: profile } = useProfile();
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('');
   const scrollTimeoutRef = useRef(null);
@@ -67,7 +69,7 @@ export default function Header() {
                 className="text-lg font-bold text-green-400 hover:text-green-300 transition-colors"
                 style={{ fontFamily: '"Caveat", cursive' }}
               >
-                Jisan Mahmud
+                {profile?.full_name || 'Jisan Mahmud'}
               </Link>
 
               {/* Nav links */}
