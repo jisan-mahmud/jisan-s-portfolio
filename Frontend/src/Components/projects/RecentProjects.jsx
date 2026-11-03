@@ -25,7 +25,7 @@ function GridCard({ project, index }) {
       className="group relative rounded-xl border border-gray-700/60 bg-gray-900/40 backdrop-blur-sm overflow-hidden hover:border-green-500/40 transition-colors duration-300"
     >
       <div className="relative w-full h-44 overflow-hidden">
-        <img src={resolveMediaUrl(project.image)} alt={project.title} className="w-full h-full object-cover transition duration-500 group-hover:scale-105 group-hover:blur-sm" />
+        <img src={resolveMediaUrl(project.image)} alt={`${project.title} project preview`} loading="lazy" decoding="async" className="w-full h-full object-cover transition duration-500 group-hover:scale-105 group-hover:blur-sm" />
         <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
           <ProjectLinks project={project} />
         </div>
@@ -56,7 +56,7 @@ function ListCard({ project, index }) {
       className="group flex gap-4 rounded-xl border border-gray-700/60 bg-gray-900/40 backdrop-blur-sm p-3 hover:border-green-500/40 transition-colors duration-300"
     >
       <div className="relative w-28 sm:w-36 shrink-0 rounded-lg overflow-hidden">
-        <img src={resolveMediaUrl(project.image)} alt={project.title} className="w-full h-full object-cover transition duration-500 group-hover:scale-105" />
+        <img src={resolveMediaUrl(project.image)} alt={`${project.title} project preview`} loading="lazy" decoding="async" className="w-full h-full object-cover transition duration-500 group-hover:scale-105" />
         <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
           <ProjectLinks project={project} />
         </div>
@@ -107,12 +107,18 @@ export default function RecentProjects({ projects = [] }) {
 
           <div className="flex items-center gap-1 bg-gray-800/60 rounded-lg p-1 border border-gray-700/50">
             <button
+              type="button"
+              aria-label="Show projects as a grid"
+              aria-pressed={isGrid}
               onClick={() => setIsGrid(true)}
               className={`p-1.5 rounded-md transition-colors duration-200 ${isGrid ? 'bg-green-500/20 text-green-400' : 'text-gray-500 hover:text-gray-300'}`}
             >
               <TbLayoutGrid size={16} />
             </button>
             <button
+              type="button"
+              aria-label="Show projects as a list"
+              aria-pressed={!isGrid}
               onClick={() => setIsGrid(false)}
               className={`p-1.5 rounded-md transition-colors duration-200 ${!isGrid ? 'bg-green-500/20 text-green-400' : 'text-gray-500 hover:text-gray-300'}`}
             >
