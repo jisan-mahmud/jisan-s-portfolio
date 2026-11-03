@@ -3,7 +3,6 @@ from pathlib import Path
 from decouple import Csv, config
 import dj_database_url
 from django.core.exceptions import ImproperlyConfigured
-from django.urls import reverse_lazy
 
 from apps.core.admin_navigation import model_permission
 
@@ -90,7 +89,7 @@ UNFOLD = {
                     {
                         "title": "Dashboard",
                         "icon": "dashboard",
-                        "link": reverse_lazy("admin:index"),
+                        "link": "/admin/",
                     },
                 ],
             },
@@ -101,13 +100,13 @@ UNFOLD = {
                     {
                         "title": "Site profile",
                         "icon": "person",
-                        "link": reverse_lazy("admin:core_siteprofile_changelist"),
+                        "link": "/admin/core/siteprofile/",
                         "permission": model_permission("core", "siteprofile"),
                     },
                     {
                         "title": "Social links",
                         "icon": "share",
-                        "link": reverse_lazy("admin:core_sociallink_changelist"),
+                        "link": "/admin/core/sociallink/",
                         "permission": model_permission("core", "sociallink"),
                     },
                 ],
@@ -119,61 +118,61 @@ UNFOLD = {
                     {
                         "title": "Projects",
                         "icon": "work",
-                        "link": reverse_lazy("admin:projects_project_changelist"),
+                        "link": "/admin/projects/project/",
                         "permission": model_permission("projects", "project"),
                     },
                     {
                         "title": "Tags",
                         "icon": "sell",
-                        "link": reverse_lazy("admin:projects_tag_changelist"),
+                        "link": "/admin/projects/tag/",
                         "permission": model_permission("projects", "tag"),
                     },
                     {
                         "title": "Technologies",
                         "icon": "code",
-                        "link": reverse_lazy("admin:projects_tech_changelist"),
+                        "link": "/admin/projects/tech/",
                         "permission": model_permission("projects", "tech"),
                     },
                     {
                         "title": "Experience",
                         "icon": "work_history",
-                        "link": reverse_lazy("admin:resume_experience_changelist"),
+                        "link": "/admin/resume/experience/",
                         "permission": model_permission("resume", "experience"),
                     },
                     {
                         "title": "Education",
                         "icon": "school",
-                        "link": reverse_lazy("admin:resume_education_changelist"),
+                        "link": "/admin/resume/education/",
                         "permission": model_permission("resume", "education"),
                     },
                     {
                         "title": "Skill categories",
                         "icon": "category",
-                        "link": reverse_lazy("admin:skills_skillcategory_changelist"),
+                        "link": "/admin/skills/skillcategory/",
                         "permission": model_permission("skills", "skillcategory"),
                     },
                     {
                         "title": "Skills",
                         "icon": "psychology",
-                        "link": reverse_lazy("admin:skills_skill_changelist"),
+                        "link": "/admin/skills/skill/",
                         "permission": model_permission("skills", "skill"),
                     },
                     {
                         "title": "About stats",
                         "icon": "monitoring",
-                        "link": reverse_lazy("admin:about_aboutstat_changelist"),
+                        "link": "/admin/about/aboutstat/",
                         "permission": model_permission("about", "aboutstat"),
                     },
                     {
                         "title": "About paragraphs",
                         "icon": "article",
-                        "link": reverse_lazy("admin:about_aboutparagraph_changelist"),
+                        "link": "/admin/about/aboutparagraph/",
                         "permission": model_permission("about", "aboutparagraph"),
                     },
                     {
                         "title": "Interests",
                         "icon": "interests",
-                        "link": reverse_lazy("admin:about_interest_changelist"),
+                        "link": "/admin/about/interest/",
                         "permission": model_permission("about", "interest"),
                     },
                 ],
@@ -185,13 +184,13 @@ UNFOLD = {
                     {
                         "title": "Users",
                         "icon": "group",
-                        "link": reverse_lazy("admin:auth_user_changelist"),
+                        "link": "/admin/auth/user/",
                         "permission": model_permission("auth", "user"),
                     },
                     {
                         "title": "Groups",
                         "icon": "groups",
-                        "link": reverse_lazy("admin:auth_group_changelist"),
+                        "link": "/admin/auth/group/",
                         "permission": model_permission("auth", "group"),
                     },
                 ],
