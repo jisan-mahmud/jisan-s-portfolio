@@ -237,8 +237,51 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
+R2_ACCOUNT_ID = config("R2_ACCOUNT_ID", default="").strip()
+R2_ACCESS_KEY_ID = config("R2_ACCESS_KEY_ID", default="").strip()
+R2_SECRET_ACCESS_KEY = config("R2_SECRET_ACCESS_KEY", default="").strip()
+R2_BUCKET_NAME = config("R2_BUCKET_NAME", default="").strip()
+R2_PUBLIC_DOMAIN = config("R2_PUBLIC_DOMAIN", default="").strip()
+
+R2_SETTINGS = {
+    "R2_ACCOUNT_ID": R2_ACCOUNT_ID,
+    "R2_ACCESS_KEY_ID": R2_ACCESS_KEY_ID,
+    "R2_SECRET_ACCESS_KEY": R2_SECRET_ACCESS_KEY,
+    "R2_BUCKET_NAME": R2_BUCKET_NAME,
+    "R2_PUBLIC_DOMAIN": R2_PUBLIC_DOMAIN,
+}
+R2_ENABLED = any(R2_SETTINGS.values())
+
+if R2_ENABLED:
+    missing_r2_settings = [name for name, value in R2_SETTINGS.items() if not value]
+    if missing_r2_settings:
+        raise ImproperlyConfigured(
+            "Cloudflare R2 storage requires all R2 settings; missing: "
+            + ", ".join(missing_r2_settings)
+        )
+
 STORAGES = {
-    "default": {"BACKEND": "django.core.files.storage.FileSystemStorage"},
+    "default": (
+        {
+            "BACKEND": "storages.backends.s3.S3Storage",
+            "OPTIONS": {
+                "access_key": R2_ACCESS_KEY_ID,
+                "secret_key": R2_SECRET_ACCESS_KEY,
+                "bucket_name": R2_BUCKET_NAME,
+                "endpoint_url": (
+                    f"https://{R2_ACCOUNT_ID}.r2.cloudflarestorage.com"
+                ),
+                "region_name": "auto",
+                "signature_version": "s3v4",
+                "default_acl": None,
+                "querystring_auth": False,
+                "file_overwrite": False,
+                "custom_domain": R2_PUBLIC_DOMAIN,
+            },
+        }
+        if R2_ENABLED
+        else {"BACKEND": "django.core.files.storage.FileSystemStorage"}
+    ),
     "staticfiles": {
         "BACKEND": (
             "django.contrib.staticfiles.storage.StaticFilesStorage"
