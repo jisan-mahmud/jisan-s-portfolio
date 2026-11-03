@@ -1,61 +1,31 @@
 import React, { useState } from 'react';
-import { FaPython, FaJs, FaReact, FaHtml5, FaCss3Alt, FaGitAlt, FaDocker, FaLinux, FaCogs } from 'react-icons/fa';
+import { FaPython, FaJs, FaReact, FaHtml5, FaCss3Alt, FaGitAlt, FaDocker, FaLinux, FaCogs, FaCode } from 'react-icons/fa';
 import { TbBrandCpp, TbLayoutGrid, TbLayoutList } from "react-icons/tb";
 import { FaC } from "react-icons/fa6";
 import { SiDjango, SiTailwindcss, SiPostgresql, SiNginx, SiJsonwebtokens, SiAmazonwebservices, SiSwagger, SiPostman } from 'react-icons/si';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const categories = [
-  {
-    label: 'Languages',
-    color: 'blue',
-    skills: [
-      { name: 'Python', icon: <FaPython /> },
-      { name: 'JavaScript', icon: <FaJs /> },
-      { name: 'C', icon: <FaC /> },
-      { name: 'C++', icon: <TbBrandCpp /> },
-    ],
-  },
-  {
-    label: 'Frontend',
-    color: 'cyan',
-    skills: [
-      { name: 'React', icon: <FaReact /> },
-      { name: 'HTML5', icon: <FaHtml5 /> },
-      { name: 'CSS3', icon: <FaCss3Alt /> },
-      { name: 'Tailwind CSS', icon: <SiTailwindcss /> },
-    ],
-  },
-  {
-    label: 'Backend',
-    color: 'green',
-    skills: [
-      { name: 'Django', icon: <SiDjango /> },
-      { name: 'DRF', icon: <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/djangorest/djangorest-original-wordmark.svg" className="w-5 h-5" /> },
-      { name: 'JWT', icon: <SiJsonwebtokens /> },
-      { name: 'PostgreSQL', icon: <SiPostgresql /> },
-    ],
-  },
-  {
-    label: 'DevOps & Cloud',
-    color: 'orange',
-    skills: [
-      { name: 'AWS', icon: <SiAmazonwebservices /> },
-      { name: 'Docker', icon: <FaDocker /> },
-      { name: 'Nginx', icon: <SiNginx /> },
-      { name: 'Linux', icon: <FaLinux /> },
-    ],
-  },
-  {
-    label: 'Tools',
-    color: 'purple',
-    skills: [
-      { name: 'Git', icon: <FaGitAlt /> },
-      { name: 'Postman', icon: <SiPostman /> },
-      { name: 'Swagger', icon: <SiSwagger /> },
-    ],
-  },
-];
+const iconMap = {
+  python: <FaPython />,
+  javascript: <FaJs />,
+  c: <FaC />,
+  cpp: <TbBrandCpp />,
+  react: <FaReact />,
+  html5: <FaHtml5 />,
+  css3: <FaCss3Alt />,
+  tailwind: <SiTailwindcss />,
+  django: <SiDjango />,
+  jwt: <SiJsonwebtokens />,
+  postgresql: <SiPostgresql />,
+  aws: <SiAmazonwebservices />,
+  docker: <FaDocker />,
+  nginx: <SiNginx />,
+  linux: <FaLinux />,
+  git: <FaGitAlt />,
+  postman: <SiPostman />,
+  swagger: <SiSwagger />,
+  code: <FaCode />,
+};
 
 const colorMap = {
   blue:   { border: 'border-blue-500/30',   bg: 'bg-blue-500/10',   text: 'text-blue-400',   dot: 'bg-blue-400',   badge: 'bg-blue-500/10 text-blue-400 border-blue-500/20' },
@@ -63,10 +33,20 @@ const colorMap = {
   green:  { border: 'border-green-500/30',  bg: 'bg-green-500/10',  text: 'text-green-400',  dot: 'bg-green-400',  badge: 'bg-green-500/10 text-green-400 border-green-500/20' },
   orange: { border: 'border-orange-500/30', bg: 'bg-orange-500/10', text: 'text-orange-400', dot: 'bg-orange-400', badge: 'bg-orange-500/10 text-orange-400 border-orange-500/20' },
   purple: { border: 'border-purple-500/30', bg: 'bg-purple-500/10', text: 'text-purple-400', dot: 'bg-purple-400', badge: 'bg-purple-500/10 text-purple-400 border-purple-500/20' },
+  red:    { border: 'border-red-500/30',    bg: 'bg-red-500/10',    text: 'text-red-400',    dot: 'bg-red-400',    badge: 'bg-red-500/10 text-red-400 border-red-500/20' },
 };
 
-export default function Technologies() {
+function SkillIcon({ skill }) {
+  if (skill.icon_url) {
+    return <img src={skill.icon_url} alt="" className="w-5 h-5" />;
+  }
+  return iconMap[skill.icon] || iconMap.code;
+}
+
+export default function Technologies({ categories = [] }) {
   const [isGrid, setIsGrid] = useState(true);
+
+  if (!categories.length) return null;
 
   return (
     <motion.div
@@ -109,7 +89,6 @@ export default function Technologies() {
 
         <AnimatePresence mode="wait">
           {!isGrid ? (
-            /* ── List view ── */
             <motion.div
               key="list"
               initial={{ opacity: 0 }}
@@ -119,10 +98,10 @@ export default function Technologies() {
               className="flex flex-col gap-3"
             >
               {categories.map((cat, catIndex) => {
-                const c = colorMap[cat.color];
+                const c = colorMap[cat.color] || colorMap.green;
                 return (
                   <motion.div
-                    key={cat.label}
+                    key={cat.id || cat.label}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: catIndex * 0.07, duration: 0.4 }}
@@ -136,13 +115,13 @@ export default function Technologies() {
                     </div>
                     <div className={`w-px self-stretch ${c.bg}`} />
                     <div className="flex flex-wrap gap-2">
-                      {cat.skills.map((skill, i) => (
+                      {cat.skills?.map((skill) => (
                         <motion.div
-                          key={skill.name}
+                          key={skill.id || skill.name}
                           whileHover={{ scale: 1.08, y: -2 }}
                           className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs font-medium ${c.badge} transition-transform duration-200`}
                         >
-                          <span className="text-sm">{skill.icon}</span>
+                          <span className="text-sm"><SkillIcon skill={skill} /></span>
                           {skill.name}
                         </motion.div>
                       ))}
@@ -152,7 +131,6 @@ export default function Technologies() {
               })}
             </motion.div>
           ) : (
-            /* ── Grid view ── */
             <motion.div
               key="grid"
               initial={{ opacity: 0 }}
@@ -162,10 +140,10 @@ export default function Technologies() {
               className="grid grid-cols-2 sm:grid-cols-3 gap-3"
             >
               {categories.map((cat, catIndex) => {
-                const c = colorMap[cat.color];
+                const c = colorMap[cat.color] || colorMap.green;
                 return (
                   <motion.div
-                    key={cat.label}
+                    key={cat.id || cat.label}
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: catIndex * 0.07, duration: 0.4 }}
@@ -178,13 +156,13 @@ export default function Technologies() {
                       </span>
                     </div>
                     <div className="flex flex-wrap gap-2">
-                      {cat.skills.map((skill) => (
+                      {cat.skills?.map((skill) => (
                         <motion.div
-                          key={skill.name}
+                          key={skill.id || skill.name}
                           whileHover={{ scale: 1.08, y: -2 }}
                           className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg border text-xs font-medium ${c.badge} transition-transform duration-200`}
                         >
-                          <span className="text-sm">{skill.icon}</span>
+                          <span className="text-sm"><SkillIcon skill={skill} /></span>
                           {skill.name}
                         </motion.div>
                       ))}
@@ -197,5 +175,5 @@ export default function Technologies() {
         </AnimatePresence>
       </div>
     </motion.div>
-  );
+  )
 }

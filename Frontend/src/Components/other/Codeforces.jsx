@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { fetchCodeforcesUser, fetchCodeforcesContests } from '../../lib/utils';
+import { apiGet } from '../../lib/api';
 import { motion } from 'framer-motion';
 import { FaCode } from 'react-icons/fa';
 import { TbTrophy, TbStar, TbCalendarStats, TbChevronLeft, TbChevronRight, TbExternalLink } from 'react-icons/tb';
+import { IntegrationSkeleton } from '../loading/Skeletons';
 
 function formatDate(sec) {
   if (!sec) return '—';
@@ -50,8 +51,7 @@ function CodeforcesAvatar({ user }) {
 }
 
 export default function Codeforces({ handle }) {
-  const envHandle = import.meta.env.VITE_CODEFORCES_HANDLE || '';
-  const initial = (handle || envHandle || '').trim();
+  const initial = (handle || '').trim();
 
   const [activeHandle] = useState(initial);
   const [user, setUser] = useState(null);
@@ -65,16 +65,18 @@ export default function Codeforces({ handle }) {
     let mounted = true;
     setLoading(true);
     setError(null);
-    Promise.allSettled([
-      fetchCodeforcesUser(activeHandle),
-      fetchCodeforcesContests(activeHandle),
-    ]).then(([userRes, contestsRes]) => {
-      if (!mounted) return;
-      if (userRes.status === 'fulfilled') setUser(userRes.value);
-      else setError(userRes.reason?.message || 'Failed to fetch user');
-      setContests(contestsRes.status === 'fulfilled' ? contestsRes.value || [] : []);
-      setLoading(false);
-    });
+    apiGet(`integrations/codeforces/${encodeURIComponent(activeHandle)}`)
+      .then((data) => {
+        if (!mounted) return;
+        setUser(data.user);
+        setContests(data.contests || []);
+      })
+      .catch((err) => {
+        if (mounted) setError(err.message || 'Failed to fetch Codeforces stats');
+      })
+      .finally(() => {
+        if (mounted) setLoading(false);
+      });
     return () => { mounted = false; };
   }, [activeHandle]);
 
@@ -113,9 +115,7 @@ export default function Codeforces({ handle }) {
         )}
 
         {loading && (
-          <div className="rounded-xl border border-gray-700/60 bg-gray-900/40 p-8 text-center text-sm text-gray-500">
-            <div className="inline-block animate-spin mr-2">⟳</div>Loading...
-          </div>
+          <IntegrationSkeleton platform="codeforces" />
         )}
 
         {user && (

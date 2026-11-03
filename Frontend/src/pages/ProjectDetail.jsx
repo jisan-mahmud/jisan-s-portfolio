@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router';
 import { motion } from 'framer-motion';
 import { FaGithub } from 'react-icons/fa';
 import { TbWorld, TbArrowLeft, TbCalendar, TbUser, TbStack2, TbListCheck, TbFileText, TbExternalLink } from 'react-icons/tb';
-import projects from '../data/projects';
+import { apiGet, resolveMediaUrl } from '../lib/api';
+import { ProjectDetailSkeleton } from '../Components/loading/Skeletons';
 
 function SectionHeader({ icon, label }) {
   return (
@@ -17,12 +18,29 @@ function SectionHeader({ icon, label }) {
 export default function ProjectDetail() {
   const { slug } = useParams();
   const navigate = useNavigate();
-  const project = projects.find(p => p.slug === slug);
+  const [project, setProject] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  if (!project) {
+  useEffect(() => {
+    let active = true;
+    setLoading(true);
+    setError(null);
+    apiGet(`portfolio/projects/${slug}`)
+      .then((data) => { if (active) setProject(data); })
+      .catch((err) => { if (active) setError(err.message || 'Project not found.'); })
+      .finally(() => { if (active) setLoading(false); });
+    return () => { active = false; };
+  }, [slug]);
+
+  if (loading) {
+    return <ProjectDetailSkeleton />;
+  }
+
+  if (error || !project) {
     return (
-      <div className="min-h-[60vh] flex flex-col items-center justify-center text-gray-400 gap-4">
-        <p>Project not found.</p>
+      <div className="min-h-[60vh] flex flex-col items-center justify-center text-gray-400 gap-4 px-6 text-center">
+        <p>{error || 'Project not found.'}</p>
         <button onClick={() => navigate('/')} className="text-green-400 hover:text-green-300 text-sm flex items-center gap-1">
           <TbArrowLeft size={15} /> Back to home
         </button>
@@ -39,7 +57,6 @@ export default function ProjectDetail() {
     >
       <div className="max-w-3xl mx-auto">
 
-        {/* Back */}
         <button
           onClick={() => navigate(-1)}
           className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-green-400 transition-colors mb-5"
@@ -47,20 +64,18 @@ export default function ProjectDetail() {
           <TbArrowLeft size={14} /> Back to projects
         </button>
 
-        {/* ── Hero ── */}
         <motion.div
           initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.1, duration: 0.5 }}
           className="rounded-xl overflow-hidden border border-gray-700/60 w-full h-52 sm:h-72 mb-5"
         >
-          <img src={project.image} alt={project.title} className="w-full h-full object-cover" />
+          <img src={resolveMediaUrl(project.image)} alt={project.title} className="w-full h-full object-cover" />
         </motion.div>
 
-        {/* ── Title block ── */}
         <div className="rounded-xl border border-gray-700/60 bg-gray-900/40 p-4 mb-3">
           <div className="flex flex-wrap gap-1.5 mb-2">
-            {project.tags.map(tag => (
+            {project.tags?.map(tag => (
               <span key={tag} className="text-[10px] px-2 py-0.5 rounded-full bg-green-500/10 text-green-400 border border-green-500/20">{tag}</span>
             ))}
           </div>
@@ -68,7 +83,6 @@ export default function ProjectDetail() {
             {project.title}
           </h1>
 
-          {/* Meta row */}
           <div className="flex flex-wrap items-center gap-4 pb-3 mb-3 border-b border-gray-700/50">
             {project.year && (
               <span className="flex items-center gap-1.5 text-xs text-gray-400">
@@ -82,7 +96,6 @@ export default function ProjectDetail() {
             )}
           </div>
 
-          {/* Links */}
           <div className="flex gap-2 flex-wrap">
             {project.github_link && (
               <a href={project.github_link} target="_blank" rel="noreferrer"
@@ -101,13 +114,11 @@ export default function ProjectDetail() {
           </div>
         </div>
 
-        {/* ── Overview ── */}
         <div className="rounded-xl border border-gray-700/60 bg-gray-900/40 p-4 mb-3">
           <SectionHeader icon={<TbFileText size={14} />} label="Overview" />
           <p className="text-gray-300 text-sm leading-relaxed whitespace-pre-line">{project.description}</p>
         </div>
 
-        {/* ── Features + Tech (2-col on sm+) ── */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
           {project.features?.length > 0 && (
             <div className="rounded-xl border border-gray-700/60 bg-gray-900/40 p-4">
@@ -135,17 +146,15 @@ export default function ProjectDetail() {
           )}
         </div>
 
-        {/* ── Case Study ── */}
-        {project.caseStudy && (
+        {project.case_study && (
           <div className="rounded-xl border border-gray-700/60 bg-gray-900/40 p-4">
             <SectionHeader icon={<TbFileText size={14} />} label="Case Study" />
             <div className="relative pl-4">
-              {/* vertical line */}
               <div className="absolute left-0 top-2 bottom-2 w-px bg-gray-700/60" />
               {[
-                { label: 'Problem',  text: project.caseStudy.problem,  dot: 'bg-red-400',   color: 'text-red-400' },
-                { label: 'Solution', text: project.caseStudy.solution, dot: 'bg-blue-400',  color: 'text-blue-400' },
-                { label: 'Outcome',  text: project.caseStudy.outcome,  dot: 'bg-green-400', color: 'text-green-400' },
+                { label: 'Problem',  text: project.case_study.problem,  dot: 'bg-red-400',   color: 'text-red-400' },
+                { label: 'Solution', text: project.case_study.solution, dot: 'bg-blue-400',  color: 'text-blue-400' },
+                { label: 'Outcome',  text: project.case_study.outcome,  dot: 'bg-green-400', color: 'text-green-400' },
               ].map(({ label, text, dot, color }, i) => (
                 <motion.div
                   key={label}
@@ -155,7 +164,6 @@ export default function ProjectDetail() {
                   transition={{ delay: i * 0.1, duration: 0.4 }}
                   className="relative mb-5 last:mb-0"
                 >
-                  {/* dot */}
                   <span className={`absolute -left-[18px] top-1 w-2.5 h-2.5 rounded-full ${dot} border-2 border-gray-900`} />
                   <span className={`text-[10px] uppercase tracking-wider font-semibold ${color} block mb-1`}>{label}</span>
                   <p className="text-gray-300 text-sm leading-relaxed">{text}</p>
