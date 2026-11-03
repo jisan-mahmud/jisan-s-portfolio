@@ -10,7 +10,9 @@ export default function MainLayout() {
       <CodeAnimation />
       <Header />
       <div className="pt-24">
-        <Outlet />
+        <main>
+          <Outlet />
+        </main>
         <Footer />
       </div>
     </div>

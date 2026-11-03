@@ -56,6 +56,19 @@ class Project(models.Model):
     class Meta:
         ordering = ["order", "id"]
 
+    def save(self, *args, **kwargs):
+        slug_max_length = self._meta.get_field("slug").max_length
+        base_slug = slugify(self.title) or "project"
+        if not self.slug or self.slug == base_slug[:slug_max_length]:
+            self.slug = base_slug[:slug_max_length]
+            suffix = 2
+            while Project.objects.filter(slug=self.slug).exclude(pk=self.pk).exists():
+                suffix_text = f"-{suffix}"
+                max_base_length = slug_max_length - len(suffix_text)
+                self.slug = f"{base_slug[:max_base_length]}{suffix_text}"
+                suffix += 1
+        super().save(*args, **kwargs)
+
     def __str__(self):
         return self.title
 

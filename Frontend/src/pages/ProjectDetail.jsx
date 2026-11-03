@@ -5,12 +5,13 @@ import { FaGithub } from 'react-icons/fa';
 import { TbWorld, TbArrowLeft, TbCalendar, TbUser, TbStack2, TbListCheck, TbFileText, TbExternalLink } from 'react-icons/tb';
 import { apiGet, resolveMediaUrl } from '../lib/api';
 import { ProjectDetailSkeleton } from '../Components/loading/Skeletons';
+import Seo from '../Components/Seo';
 
 function SectionHeader({ icon, label }) {
   return (
     <div className="flex items-center gap-2 mb-3">
       <span className="text-green-400">{icon}</span>
-      <span className="text-[10px] uppercase tracking-wider text-gray-500 font-semibold">{label}</span>
+      <h2 className="text-[10px] uppercase tracking-wider text-gray-500 font-semibold">{label}</h2>
     </div>
   );
 }
@@ -34,44 +35,84 @@ export default function ProjectDetail() {
   }, [slug]);
 
   if (loading) {
-    return <ProjectDetailSkeleton />;
+    return (
+      <>
+        <Seo
+          title="Project | Jisan Mahmud"
+          description="Explore a software project by Jisan Mahmud."
+          path={`/projects/${slug}`}
+        />
+        <ProjectDetailSkeleton />
+      </>
+    );
   }
 
   if (error || !project) {
     return (
-      <div className="min-h-[60vh] flex flex-col items-center justify-center text-gray-400 gap-4 px-6 text-center">
-        <p>{error || 'Project not found.'}</p>
-        <button onClick={() => navigate('/')} className="text-green-400 hover:text-green-300 text-sm flex items-center gap-1">
-          <TbArrowLeft size={15} /> Back to home
-        </button>
-      </div>
+      <>
+        <Seo
+          title="Project not found | Jisan Mahmud"
+          description="This project could not be found. Browse Jisan Mahmud's portfolio for more projects."
+          path={`/projects/${slug}`}
+        />
+        <div className="min-h-[60vh] flex flex-col items-center justify-center text-gray-400 gap-4 px-6 text-center">
+          <p>{error || 'Project not found.'}</p>
+          <button onClick={() => navigate('/')} className="text-green-400 hover:text-green-300 text-sm flex items-center gap-1">
+            <TbArrowLeft size={15} /> Back to home
+          </button>
+        </div>
+      </>
     );
   }
 
+  const pageDescription = project.short_desc || project.description;
+  const siteOrigin = new URL(import.meta.env.VITE_SITE_URL || window.location.origin).origin;
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'CreativeWork',
+    name: project.title,
+    description: pageDescription,
+    url: `${siteOrigin}/projects/${encodeURIComponent(project.slug)}`,
+    image: project.image ? new URL(resolveMediaUrl(project.image), siteOrigin).href : undefined,
+    author: {
+      '@type': 'Person',
+      name: 'Jisan Mahmud',
+    },
+  };
+
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="py-10 px-4 sm:px-6 w-full"
-    >
-      <div className="max-w-3xl mx-auto">
+    <>
+      <Seo
+        title={`${project.title} | Jisan Mahmud`}
+        description={pageDescription}
+        image={project.image}
+        type="article"
+        path={`/projects/${project.slug}`}
+        structuredData={structuredData}
+      />
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="py-10 px-4 sm:px-6 w-full"
+      >
+        <div className="max-w-3xl mx-auto">
 
-        <button
-          onClick={() => navigate(-1)}
-          className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-green-400 transition-colors mb-5"
-        >
-          <TbArrowLeft size={14} /> Back to projects
-        </button>
+          <button
+            onClick={() => navigate(-1)}
+            className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-green-400 transition-colors mb-5"
+          >
+            <TbArrowLeft size={14} /> Back to projects
+          </button>
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.98 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.1, duration: 0.5 }}
-          className="rounded-xl overflow-hidden border border-gray-700/60 w-full h-52 sm:h-72 mb-5"
-        >
-          <img src={resolveMediaUrl(project.image)} alt={project.title} className="w-full h-full object-cover" />
-        </motion.div>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.1, duration: 0.5 }}
+            className="rounded-xl overflow-hidden border border-gray-700/60 w-full h-52 sm:h-72 mb-5"
+          >
+            <img src={resolveMediaUrl(project.image)} alt={`${project.title} project preview`} fetchPriority="high" className="w-full h-full object-cover" />
+          </motion.div>
 
         <div className="rounded-xl border border-gray-700/60 bg-gray-900/40 p-4 mb-3">
           <div className="flex flex-wrap gap-1.5 mb-2">
@@ -175,5 +216,6 @@ export default function ProjectDetail() {
 
       </div>
     </motion.div>
+    </>
   );
 }

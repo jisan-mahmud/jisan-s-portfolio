@@ -7,6 +7,35 @@ from rest_framework.test import APIClient
 from .models import CaseStudy, Project, ProjectFeature, Tag, Tech
 
 
+class ProjectSlugTests(TestCase):
+    def test_blank_slug_is_generated_from_title(self):
+        project = Project.objects.create(title="My New Project")
+
+        self.assertEqual(project.slug, "my-new-project")
+
+    def test_manual_slug_is_preserved_when_title_changes(self):
+        project = Project.objects.create(title="Original Title", slug="custom-slug")
+        project.title = "Updated Title"
+        project.save()
+
+        self.assertEqual(project.slug, "custom-slug")
+
+    def test_generated_slug_gets_numeric_suffix_when_taken(self):
+        first = Project.objects.create(title="My Project", slug="my-project")
+        second = Project.objects.create(title="My Project", slug="my-project")
+        third = Project.objects.create(title="My Project", slug="my-project")
+
+        self.assertEqual(
+            [first.slug, second.slug, third.slug],
+            ["my-project", "my-project-2", "my-project-3"],
+        )
+
+    def test_title_without_slug_characters_uses_project_fallback(self):
+        project = Project.objects.create(title="✨")
+
+        self.assertEqual(project.slug, "project")
+
+
 class ProjectApiTests(TestCase):
     def setUp(self):
         cache.clear()

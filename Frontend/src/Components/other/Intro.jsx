@@ -137,6 +137,7 @@ export default function Intro({ profile }) {
             <img
               src={avatar}
               alt={profile?.full_name || "Profile avatar"}
+              fetchPriority="high"
               className="relative w-full h-full rounded-full object-cover border-2 border-green-500/50 z-10"
             />
           </div>
