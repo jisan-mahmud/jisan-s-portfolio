@@ -57,6 +57,8 @@ Production: `docker compose up --build` (port `8007`).
 
 To use Neon or another hosted PostgreSQL provider, set `DATABASE_URL` to the provider's connection string in your local ignored environment file or deployment secrets. The connection string takes precedence over `POSTGRES_*`; keep it private and do not commit it. `django-database-url` parses the URL and passes PostgreSQL connection options such as `sslmode` and `channel_binding` through to Django.
 
+To store uploaded media in Cloudflare R2, set all five `R2_*` variables in your deployment environment. `R2_PUBLIC_DOMAIN` should be the public bucket hostname without `https://`. When the full configuration is present, Django stores uploaded images in R2 and serves their URLs from that domain; without any R2 values, local filesystem media storage remains enabled. Partial R2 configuration fails Django startup with an explicit error. Static files continue to use the existing Django/WhiteNoise storage and are not uploaded to R2.
+
 ## Environment
 
 See `.env.example` (local) and `.env.docker.example` (Docker). Important values:
@@ -71,6 +73,7 @@ See `.env.example` (local) and `.env.docker.example` (Docker). Important values:
 | `DATABASE_URL` | Optional PostgreSQL connection URL parsed by `django-database-url`; takes precedence over `POSTGRES_*` |
 | `POSTGRES_*` | PostgreSQL connection fields when `DATABASE_URL` is empty; leave `POSTGRES_DB` empty for SQLite |
 | `REDIS_URL` | Redis connection URL (supports `rediss://` for TLS); empty for local memory cache |
+| `R2_ACCOUNT_ID`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`, `R2_BUCKET_NAME`, `R2_PUBLIC_DOMAIN` | Optional Cloudflare R2 credentials, bucket, and public hostname for uploaded media; configure all five together |
 | `PORTFOLIO_CACHE_TTL` / `PORTFOLIO_CACHE_VERSION` | Home cache lifetime and version |
 | `CODEFORCES_HANDLE` / `LEETCODE_USERNAME` | Default integration handles |
 | `INTEGRATION_TIMEOUT` | External request timeout in seconds |
