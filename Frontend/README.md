@@ -1,22 +1,40 @@
-# React + Vite
+# Portfolio Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React + Vite frontend for the Jisan Mahmud portfolio. All content is loaded from the Django API in `../Backend`.
 
-Currently, two official plugins are available:
+## Development
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```bash
+npm install
+cp .env.example .env
+npm run dev
+```
 
-## Expanding the ESLint configuration
+The Vite dev server proxies `/api` and `/media` to `http://localhost:8007` by default. Override the backend target with `VITE_API_PROXY_TARGET` if needed.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Environment
 
-## Codeforces integration
+Copy `.env.example` to `.env`:
 
-Add Codeforces credentials to a local env file (do NOT commit secrets): create a `.env` at the project root and set the following variables:
+```env
+VITE_API_BASE_URL=/api/v1
+```
 
-- `VITE_CODEFORCES_KEY` — your API key (optional)
-- `VITE_CODEFORCES_SECRET` — your API secret (optional)
-- `VITE_CODEFORCES_HANDLE` — default Codeforces handle to display
+- In development, keep `VITE_API_BASE_URL=/api/v1` and let Vite proxy requests.
+- In production, set it to the deployed backend URL, e.g. `https://api.example.com/api/v1`.
 
-An example file is provided at `.env.example`. This project reads `VITE_CODEFORCES_HANDLE` on the client and uses the public Codeforces API to fetch user info. Keep private keys out of the repo.
+## Content and stats
+
+- Portfolio content (profile, projects, experience, education, skills, contact links) comes from `GET /api/v1/portfolio/home/`.
+- Project details come from `GET /api/v1/portfolio/projects/<slug>/`.
+- Codeforces and LeetCode statistics are fetched through the backend integration endpoints.
+- Content is managed in the Django admin at the backend `/admin/`.
+
+## Scripts
+
+```bash
+npm run dev
+npm run build
+npm run lint
+npm run preview
+```

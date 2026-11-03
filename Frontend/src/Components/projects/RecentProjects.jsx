@@ -4,7 +4,7 @@ import { TbWorld, TbLayoutGrid, TbLayoutList, TbArrowUpRight } from "react-icons
 import IconButton from '../button/IconButton';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router';
-import projects from '../../data/projects';
+import { resolveMediaUrl } from '../../lib/api';
 
 function ProjectLinks({ project }) {
   return (
@@ -25,7 +25,7 @@ function GridCard({ project, index }) {
       className="group relative rounded-xl border border-gray-700/60 bg-gray-900/40 backdrop-blur-sm overflow-hidden hover:border-green-500/40 transition-colors duration-300"
     >
       <div className="relative w-full h-44 overflow-hidden">
-        <img src={project.image} alt={project.title} className="w-full h-full object-cover transition duration-500 group-hover:scale-105 group-hover:blur-sm" />
+        <img src={resolveMediaUrl(project.image)} alt={project.title} className="w-full h-full object-cover transition duration-500 group-hover:scale-105 group-hover:blur-sm" />
         <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
           <ProjectLinks project={project} />
         </div>
@@ -37,7 +37,7 @@ function GridCard({ project, index }) {
           ))}
         </div>
         <h3 className="text-white font-semibold text-sm leading-snug" style={{ fontFamily: '"Poppins", sans-serif' }}>{project.title}</h3>
-        <p className="text-gray-400 text-xs mt-1.5 leading-relaxed line-clamp-2">{project.description || project.shortDesc}</p>
+        <p className="text-gray-400 text-xs mt-1.5 leading-relaxed line-clamp-2">{project.short_desc || project.description}</p>
         <Link to={`/projects/${project.slug}`} className="inline-flex items-center gap-1 mt-3 text-xs text-green-400 hover:text-green-300 transition-colors">
           View details <TbArrowUpRight size={13} />
         </Link>
@@ -56,7 +56,7 @@ function ListCard({ project, index }) {
       className="group flex gap-4 rounded-xl border border-gray-700/60 bg-gray-900/40 backdrop-blur-sm p-3 hover:border-green-500/40 transition-colors duration-300"
     >
       <div className="relative w-28 sm:w-36 shrink-0 rounded-lg overflow-hidden">
-        <img src={project.image} alt={project.title} className="w-full h-full object-cover transition duration-500 group-hover:scale-105" />
+        <img src={resolveMediaUrl(project.image)} alt={project.title} className="w-full h-full object-cover transition duration-500 group-hover:scale-105" />
         <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
           <ProjectLinks project={project} />
         </div>
@@ -68,7 +68,7 @@ function ListCard({ project, index }) {
           ))}
         </div>
         <h3 className="text-white font-semibold text-sm leading-snug truncate" style={{ fontFamily: '"Poppins", sans-serif' }}>{project.title}</h3>
-        <p className="text-gray-400 text-xs mt-1 leading-relaxed line-clamp-2">{project.description || project.shortDesc}</p>
+        <p className="text-gray-400 text-xs mt-1 leading-relaxed line-clamp-2">{project.short_desc || project.description}</p>
         <Link to={`/projects/${project.slug}`} className="inline-flex items-center gap-1 mt-2 text-xs text-green-400 hover:text-green-300 transition-colors">
           View details <TbArrowUpRight size={13} />
         </Link>
@@ -77,8 +77,10 @@ function ListCard({ project, index }) {
   );
 }
 
-export default function RecentProjects() {
+export default function RecentProjects({ projects = [] }) {
   const [isGrid, setIsGrid] = useState(false);
+
+  if (!projects.length) return null;
 
   return (
     <motion.div
@@ -130,7 +132,7 @@ export default function RecentProjects() {
               className="grid grid-cols-1 sm:grid-cols-2 gap-4"
             >
               {projects.map((project, index) => (
-                <GridCard key={project.title} project={project} index={index} />
+                <GridCard key={project.slug} project={project} index={index} />
               ))}
             </motion.div>
           ) : (
@@ -143,7 +145,7 @@ export default function RecentProjects() {
               className="flex flex-col gap-3"
             >
               {projects.map((project, index) => (
-                <ListCard key={project.title} project={project} index={index} />
+                <ListCard key={project.slug} project={project} index={index} />
               ))}
             </motion.div>
           )}

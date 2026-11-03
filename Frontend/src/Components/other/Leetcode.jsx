@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { fetchLeetcodeUser } from '../../lib/utils';
+import { apiGet } from '../../lib/api';
 import { motion } from 'framer-motion';
 import { TbCode, TbTrophy, TbCircleCheck, TbExternalLink, TbTag, TbChevronDown } from 'react-icons/tb';
 
@@ -57,7 +57,7 @@ function TagGroup({ label, color, bg, border, bar, tags, globalMax }) {
 }
 
 export default function Leetcode({ username }) {
-  const activeUsername = (username || import.meta.env.VITE_LEETCODE_USERNAME || '').trim();
+  const activeUsername = (username || '').trim();
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -67,9 +67,10 @@ export default function Leetcode({ username }) {
     let mounted = true;
     setLoading(true);
     setError(null);
-    fetchLeetcodeUser(activeUsername)
-      .then(d => { if (mounted) { setData(d); setLoading(false); } })
-      .catch(e => { if (mounted) { setError(e.message || 'Failed'); setLoading(false); } });
+    apiGet(`integrations/leetcode/${encodeURIComponent(activeUsername)}`)
+      .then((result) => { if (mounted) setData(result); })
+      .catch((err) => { if (mounted) setError(err.message || 'Failed to fetch LeetCode stats'); })
+      .finally(() => { if (mounted) setLoading(false); });
     return () => { mounted = false; };
   }, [activeUsername]);
 
