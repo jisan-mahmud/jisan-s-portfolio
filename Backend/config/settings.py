@@ -1,7 +1,11 @@
 from pathlib import Path
 
 from decouple import Csv, config
+import dj_database_url
 from django.core.exceptions import ImproperlyConfigured
+from django.urls import reverse_lazy
+
+from apps.core.admin_navigation import model_permission
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -18,6 +22,7 @@ ALLOWED_HOSTS = config(
 )
 
 INSTALLED_APPS = [
+    "unfold",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -55,7 +60,7 @@ ROOT_URLCONF = "config.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -67,29 +72,154 @@ TEMPLATES = [
     },
 ]
 
+UNFOLD = {
+    "SITE_TITLE": "Portfolio Admin",
+    "SITE_HEADER": "Jisan Mahmud",
+    "SITE_SUBHEADER": "Portfolio content management",
+    "SITE_URL": "/",
+    "SITE_SYMBOL": "dashboard_customize",
+    "DASHBOARD_CALLBACK": "apps.core.admin_dashboard.dashboard_callback",
+    "SIDEBAR": {
+        "show_search": True,
+        "show_all_applications": False,
+        "navigation": [
+            {
+                "title": "Overview",
+                "separator": True,
+                "items": [
+                    {
+                        "title": "Dashboard",
+                        "icon": "dashboard",
+                        "link": reverse_lazy("admin:index"),
+                    },
+                ],
+            },
+            {
+                "title": "Site",
+                "separator": True,
+                "items": [
+                    {
+                        "title": "Site profile",
+                        "icon": "person",
+                        "link": reverse_lazy("admin:core_siteprofile_changelist"),
+                        "permission": model_permission("core", "siteprofile"),
+                    },
+                    {
+                        "title": "Social links",
+                        "icon": "share",
+                        "link": reverse_lazy("admin:core_sociallink_changelist"),
+                        "permission": model_permission("core", "sociallink"),
+                    },
+                ],
+            },
+            {
+                "title": "Portfolio content",
+                "separator": True,
+                "items": [
+                    {
+                        "title": "Projects",
+                        "icon": "work",
+                        "link": reverse_lazy("admin:projects_project_changelist"),
+                        "permission": model_permission("projects", "project"),
+                    },
+                    {
+                        "title": "Tags",
+                        "icon": "sell",
+                        "link": reverse_lazy("admin:projects_tag_changelist"),
+                        "permission": model_permission("projects", "tag"),
+                    },
+                    {
+                        "title": "Technologies",
+                        "icon": "code",
+                        "link": reverse_lazy("admin:projects_tech_changelist"),
+                        "permission": model_permission("projects", "tech"),
+                    },
+                    {
+                        "title": "Experience",
+                        "icon": "work_history",
+                        "link": reverse_lazy("admin:resume_experience_changelist"),
+                        "permission": model_permission("resume", "experience"),
+                    },
+                    {
+                        "title": "Education",
+                        "icon": "school",
+                        "link": reverse_lazy("admin:resume_education_changelist"),
+                        "permission": model_permission("resume", "education"),
+                    },
+                    {
+                        "title": "Skill categories",
+                        "icon": "category",
+                        "link": reverse_lazy("admin:skills_skillcategory_changelist"),
+                        "permission": model_permission("skills", "skillcategory"),
+                    },
+                    {
+                        "title": "Skills",
+                        "icon": "psychology",
+                        "link": reverse_lazy("admin:skills_skill_changelist"),
+                        "permission": model_permission("skills", "skill"),
+                    },
+                    {
+                        "title": "About stats",
+                        "icon": "monitoring",
+                        "link": reverse_lazy("admin:about_aboutstat_changelist"),
+                        "permission": model_permission("about", "aboutstat"),
+                    },
+                    {
+                        "title": "About paragraphs",
+                        "icon": "article",
+                        "link": reverse_lazy("admin:about_aboutparagraph_changelist"),
+                        "permission": model_permission("about", "aboutparagraph"),
+                    },
+                    {
+                        "title": "Interests",
+                        "icon": "interests",
+                        "link": reverse_lazy("admin:about_interest_changelist"),
+                        "permission": model_permission("about", "interest"),
+                    },
+                ],
+            },
+            {
+                "title": "Access",
+                "separator": True,
+                "items": [
+                    {
+                        "title": "Users",
+                        "icon": "group",
+                        "link": reverse_lazy("admin:auth_user_changelist"),
+                        "permission": model_permission("auth", "user"),
+                    },
+                    {
+                        "title": "Groups",
+                        "icon": "groups",
+                        "link": reverse_lazy("admin:auth_group_changelist"),
+                        "permission": model_permission("auth", "group"),
+                    },
+                ],
+            },
+        ],
+    },
+}
+
 WSGI_APPLICATION = "config.wsgi.application"
 ASGI_APPLICATION = "config.asgi.application"
 
-if config("POSTGRES_DB", default=""):
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.postgresql",
-            "NAME": config("POSTGRES_DB"),
-            "USER": config("POSTGRES_USER", default="postgres"),
-            "PASSWORD": config("POSTGRES_PASSWORD", default=""),
-            "HOST": config("POSTGRES_HOST", default="localhost"),
-            "PORT": config("POSTGRES_PORT", default="5432"),
-            "CONN_MAX_AGE": 60,
-            "CONN_HEALTH_CHECKS": True,
-        }
-    }
-else:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": BASE_DIR / "db.sqlite3",
-        }
-    }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': config('POSTGRES_DB'),
+#         'USER': config('POSTGRES_USER'),
+#         'PASSWORD': config('POSTGRES_PASSWORD'),
+#         'HOST': config('POSTGRES_HOST'),
+#         'PORT': config('POSTGRES_PORT'),
+#     }
+# }
+
+DATABASES = {
+    "default": dj_database_url.parse(
+        config('DATABASE_URL'),
+        conn_max_age=0,
+    )
+}
 
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
@@ -121,7 +251,7 @@ STORAGES = {
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-REDIS_CACHE_URL = config("REDIS_CACHE_URL", default="")
+REDIS_CACHE_URL = config("REDIS_URL", default=config("REDIS_CACHE_URL", default=""))
 if REDIS_CACHE_URL:
     CACHES = {
         "default": {

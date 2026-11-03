@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { apiGet } from '../../lib/api';
 import { motion } from 'framer-motion';
 import { TbCode, TbTrophy, TbCircleCheck, TbExternalLink, TbTag, TbChevronDown } from 'react-icons/tb';
+import { IntegrationSkeleton } from '../loading/Skeletons';
 
 const GROUPS = [
   { key: 'advanced',     label: 'Advanced',     color: 'text-red-400',    bg: 'bg-red-400/10',    border: 'border-red-400/20',    bar: 'bg-red-400' },
@@ -105,9 +106,7 @@ export default function Leetcode({ username }) {
           <div className="text-sm text-red-400 p-3 bg-red-500/10 rounded-xl border border-red-500/20">{error}</div>
         )}
         {loading && (
-          <div className="rounded-xl border border-gray-700/60 bg-gray-900/40 p-8 text-center text-sm text-gray-500">
-            <span className="inline-block animate-spin mr-2">⟳</span>Loading...
-          </div>
+          <IntegrationSkeleton platform="leetcode" />
         )}
 
         {data && (

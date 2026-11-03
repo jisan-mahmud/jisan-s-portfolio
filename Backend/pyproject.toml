@@ -7,8 +7,10 @@ requires-python = ">=3.12"
 dependencies = [
     "django>=6.0.4",
     "django-cors-headers>=4.7.0",
+    "django-database-url>=1.0.3",
     "django-filter>=25.2",
     "django-redis>=6.0.0",
+    "django-unfold>=0.110.1",
     "djangorestframework>=3.17.1",
     "drf-spectacular>=0.29.0",
     "gunicorn>=25.3.0",
